@@ -529,7 +529,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
   <a class="toc-card" href="#sec-10미해결문제와미래전망">
     <span class="sec-num">Sec 10-11</span>
     <h3>미해결 문제, 통합 인사이트, 최전선 사례, 결론</h3>
-    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(RECAP &amp; MEM)</strong> + 미래 4대 축</div>
+    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(π<sup>*</sup><sub>0.6</sub> &amp; MEM)</strong> + 미래 4대 축</div>
     <div class="why"><strong>왜?</strong> 미해결 과제를 식별한 뒤, 최신 돌파구가 그 과제들을 어떻게 공략하는지 보여주어 &quot;이론→실증&quot;의 서사를 완성한다.</div>
   </a>
 </div><!-- toc-diagram -->
@@ -992,7 +992,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <h3 id="sec-이산디퓨전DiscreteDiffusion방식">이산 디퓨전(Discrete Diffusion) 방식</h3>
 <p><strong>이산 디퓨전(Discrete Diffusion) VLA</strong>: ICLR 2026에서 4개의 독립 연구가 동시에 제안한 새로운 패러다임이다. 기존 디퓨전이 연속 공간에서 작동하는 것과 달리, 이산 디퓨전은 토큰화된 행동 시퀀스에 직접 적용되어 자기회귀의 순차 생성 없이도 이산 토큰을 병렬로 생성한다. dVLA <a href="https://arxiv.org/abs/2509.25681" target="_blank" rel="noopener" class="ref-link">[65]</a>, DIVA, UNIFIED DIFFUSION VLA 등이 이 범주에 속하며, LIBERO에서 95-98% 성공률을 보고했다. 이 접근은 자기회귀의 해석 가능성과 디퓨전의 다중 모드성을 결합하려는 시도로, 2026년 가장 활발한 연구 방향 중 하나이다.</p>
 <h3 id="sec-강화학습RL기반방식">강화학습(RL) 기반 방식</h3>
-<p>보상 신호(reward signal)를 기반으로 정책을 직접 최적화한다. 순수 RL 기반 VLA는 드물지만, BC로 사전학습된 VLA를 RL로 미세조정하는 패턴이 급부상하고 있다. GRPO(Group Relative Policy Optimization), RLVF(Reinforcement Learning from Visual Feedback), RECAP <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> 등이 대표적이다.</p>
+<p>보상 신호(reward signal)를 기반으로 정책을 직접 최적화한다. 순수 RL 기반 VLA는 드물지만, BC로 사전학습된 VLA를 RL로 미세조정하는 패턴이 급부상하고 있다. GRPO(Group Relative Policy Optimization), RLVF(Reinforcement Learning from Visual Feedback), π<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> 등이 대표적이다.</p>
 <h3 id="sec-하이브리드Hybrid방식">하이브리드(Hybrid) 방식</h3>
 <p>자기회귀와 디퓨전의 장점을 결합한다. HybridVLA <a href="https://arxiv.org/abs/2503.10631" target="_blank" rel="noopener" class="ref-link">[79]</a>는 고수준 의미 토큰은 AR로 생성하고, 저수준 연속 행동은 디퓨전으로 생성하는 이중 디코딩 구조를 제안했다. UniVLA <a href="https://arxiv.org/abs/2505.06111" target="_blank" rel="noopener" class="ref-link">[80]</a>는 월드 모델의 잠재 표현과 행동 생성을 단일 프레임워크에서 결합한다.</p>
 <h3 id="sec-특수도메인Specialized방식">특수 도메인(Specialized) 방식</h3>
@@ -2115,25 +2115,25 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <hr class="section-divider">
 <h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
 
-<p>앞선 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 도출했다. 그렇다면 이 과제들에 대해 실제로 얼마나 진전이 이루어지고 있는가? 2025년 11월, Physical Intelligence(PI)가 동시에 발표한 두 논문은 이 질문에 대한 가장 구체적인 답변을 제공한다. <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 6.3절과 Insight 5에서 논의한 "BC→RL 전환"을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 "장기 과제와 메모리 부재"를 각각 정면으로 공략한다. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하며, 각각 VLA의 핵심 한계인 "BC의 성능 천장"과 "메모리 부재"를 실세계 규모에서 돌파한다.</p>
+<p>앞선 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 도출했다. 그렇다면 이 과제들에 대해 실제로 얼마나 진전이 이루어지고 있는가? 2025년 11월, Physical Intelligence(PI)가 동시에 발표한 두 논문은 이 질문에 대한 가장 구체적인 답변을 제공한다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 6.3절과 Insight 5에서 논의한 "BC→RL 전환"을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 "장기 과제와 메모리 부재"를 각각 정면으로 공략한다. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하며, 각각 VLA의 핵심 한계인 "BC의 성능 천장"과 "메모리 부재"를 실세계 규모에서 돌파한다.</p>
 
-<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
-<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub> / RECAP: 경험으로부터 배우는 VLA</h3>
+<!-- ─────────────── π*0.6 ─────────────── -->
+<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub>: 경험으로부터 배우는 VLA</h3>
 <p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> · Physical Intelligence · 2025.11</p>
 
-<p><strong>RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)</strong>은 VLA 모델이 실세계 배포 경험을 통해 스스로 개선할 수 있도록 하는 범용 RL 후처리 프레임워크이다. 6.3절에서 다룬 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등)이 대부분 시뮬레이션 벤치마크에서의 검증에 머문 반면, RECAP은 <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 최초로 성공적으로 시연했다는 점에서 질적 전환점이다.</p>
+<p>π<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)이라는 방법론을 통해 VLA 모델이 실세계 배포 경험으로부터 스스로 개선할 수 있도록 하는 범용 RL 후처리 프레임워크이다. 6.3절에서 다룬 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등)이 대부분 시뮬레이션 벤치마크에서의 검증에 머문 반면, π<sup>*</sup><sub>0.6</sub>는 <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 최초로 성공적으로 시연했다는 점에서 질적 전환점이다.</p>
 
 <p><strong>핵심 기술 혁신: Advantage Conditioning.</strong> 기존 VLA RL 후처리 방법들이 PPO나 GRPO 같은 정책 경사(policy gradient) 기반 추출을 사용한 것과 달리, RECAP은 <em>advantage conditioning</em>이라는 근본적으로 다른 정책 추출 방식을 채택한다. 핵심 아이디어는 다음과 같다:</p>
 <p>(1) <strong>분포적 가치 함수(distributional value function)</strong>를 별도로 학습한다. 이 가치 함수는 670M 파라미터의 소형 VLM 백본을 사용하며, 각 상태에서 성공적 완료까지의 남은 스텝 수를 분포로 예측한다(201개 이산 bin). (2) 가치 함수로부터 각 행동의 <strong>advantage 값</strong>을 추정하고, 이를 이진화하여 &quot;Advantage: positive/negative&quot;라는 텍스트 토큰을 VLA 입력에 추가한다. (3) VLA는 모든 데이터(시연 + 자율 롤아웃 + 인간 교정)에 대해 advantage 조건부 지도학습으로 학습하되, 추론 시에는 항상 &quot;Advantage: positive&quot;로 조건화하여 개선된 정책을 추출한다.</p>
 
-<p>이 접근법의 결정적 장점은 <strong>Flow Matching 기반 VLA와의 호환성</strong>이다. PPO/GRPO는 log-likelihood의 명시적 계산을 요구하는데, Flow Matching 모델은 이를 직접 제공하지 못하여 근사가 필요하다. Advantage conditioning은 이 문제를 완전히 우회하여, 단순한 조건부 지도학습만으로 정책 개선을 달성한다. 실험에서 RECAP은 동일한 데이터로 학습한 AWR 및 PPO 기반 방법을 크게 능가했다.</p>
+<p>이 접근법의 결정적 장점은 <strong>Flow Matching 기반 VLA와의 호환성</strong>이다. PPO/GRPO는 log-likelihood의 명시적 계산을 요구하는데, Flow Matching 모델은 이를 직접 제공하지 못하여 근사가 필요하다. Advantage conditioning은 이 문제를 완전히 우회하여, 단순한 조건부 지도학습만으로 정책 개선을 달성한다. 실험에서 π<sup>*</sup><sub>0.6</sub>는 동일한 데이터로 학습한 AWR 및 PPO 기반 방법을 크게 능가했다.</p>
 
 <p><strong>세 가지 데이터 소스의 통합.</strong> RECAP은 (1) <strong>시연 데이터</strong>(초기 SFT용), (2) <strong>자율 롤아웃</strong>(로봇이 스스로 수행한 시도, 성공/실패 레이블 포함), (3) <strong>인간 교정</strong>(human-gated DAgger 방식, 자율 실행 중 인간이 개입하여 실수를 교정)을 하나의 프레임워크 안에서 결합한다. 인간 교정 데이터에는 항상 positive advantage를 부여하고, 나머지 데이터는 가치 함수의 추정에 따라 advantage를 할당한다.</p>
 
 <p><strong>실세계 성과.</strong> π<sup>*</sup><sub>0.6</sub>는 다음 세 가지 복합 태스크에서 검증되었다:</p>
 <div class="model-table">
 <table>
-<thead><tr><th>태스크</th><th>소요 시간</th><th>RECAP 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
+<thead><tr><th>태스크</th><th>소요 시간</th><th>π<sup>*</sup><sub>0.6</sub> 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
 <tbody>
 <tr><td><strong>에스프레소 제조</strong></td><td>~200초/회</td><td>2배 이상 향상</td><td>90%+</td><td>13시간 연속</td></tr>
 <tr><td><strong>다양한 빨래 접기</strong>(11종)</td><td>~500초/회</td><td>2배 이상 향상</td><td>~70%(가장 어려운 버튼셔츠 기준)</td><td>2시간+ (새 집에서)</td></tr>
@@ -2142,9 +2142,9 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 </table>
 </div>
 
-<p>가장 어려운 태스크에서 RECAP은 throughput(시간당 성공 완료 수)을 2배 이상 높이고, 실패율을 약 절반으로 줄였다. 특히 &quot;targeted failure removal&quot; 실험에서는 특정 실패 모드(옷깃 방향 오류)를 600개 자율 궤적 × 2회 반복만으로 97% 성공률까지 제거하는 데 성공했다.</p>
+<p>가장 어려운 태스크에서 π<sup>*</sup><sub>0.6</sub>는 throughput(시간당 성공 완료 수)을 2배 이상 높이고, 실패율을 약 절반으로 줄였다. 특히 &quot;targeted failure removal&quot; 실험에서는 특정 실패 모드(옷깃 방향 오류)를 600개 자율 궤적 × 2회 반복만으로 97% 성공률까지 제거하는 데 성공했다.</p>
 
-<p><strong>서베이 맥락에서의 의의.</strong> RECAP은 6.3절에서 논의한 &quot;BC→RL 전환&quot;의 가장 완성된 실현이다. 기존 연구들이 시뮬레이션 벤치마크(LIBERO 등)에서 RL 후처리의 가능성을 입증했다면, RECAP은 <em>실세계 장시간 복합 태스크</em>에서 <em>대규모 Flow Matching VLA</em>에 대한 end-to-end RL의 실용성을 최초로 입증했다. 이는 LLM 분야에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 이어진 발전 경로가 VLA에서도 현실화되고 있음을 의미한다.</p>
+<p><strong>서베이 맥락에서의 의의.</strong> π<sup>*</sup><sub>0.6</sub>는 6.3절에서 논의한 &quot;BC→RL 전환&quot;의 가장 완성된 실현이다. 기존 연구들이 시뮬레이션 벤치마크(LIBERO 등)에서 RL 후처리의 가능성을 입증했다면, π<sup>*</sup><sub>0.6</sub>는 <em>실세계 장시간 복합 태스크</em>에서 <em>대규모 Flow Matching VLA</em>에 대한 end-to-end RL의 실용성을 최초로 입증했다. 이는 LLM 분야에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 이어진 발전 경로가 VLA에서도 현실화되고 있음을 의미한다.</p>
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
@@ -2182,7 +2182,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 
 <div class="model-table">
 <table>
-<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> / RECAP</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
+<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> [157]</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
 <tbody>
 <tr><td><strong>해결하는 한계</strong></td><td>BC의 성능 천장, 시연 밖 행동 발견 불가</td><td>메모리 부재, 장시간 과제 불가, 부분 관측성</td></tr>
 <tr><td><strong>기반 모델</strong></td><td>π0.6 (Gemma 3 4B + 860M Action Expert)</td><td>π0.6 (동일)</td></tr>
@@ -2198,11 +2198,11 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <div class="chain-step"><strong>π0</strong> (2024): VLM + Flow Matching Action Expert의 첫 결합</div>
 <div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
 <div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드, KI 학습 레시피</div>
-<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
+<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub></strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
 <div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
 </div>
 
-<p>이 두 논문을 종합하면, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있다: <strong>&quot;더 잘하기&quot;(RECAP)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. RECAP이 개별 행동의 품질을 시연 수준을 넘어 끌어올린다면, MEM은 개별 행동들이 수십 분에 걸친 일관된 과제 수행으로 엮이도록 한다. 두 접근이 하나의 모델에 결합된다면, &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 실현 가능해진다. 이는 본 서베이가 제시한 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이며, 앞서 식별한 미해결 과제들이 더 이상 이론적 추측이 아닌 공학적 도전으로 전환되고 있음을 보여준다.</p>
+<p>이 두 논문을 종합하면, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있다: <strong>&quot;더 잘하기&quot;(π<sup>*</sup><sub>0.6</sub>)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. π<sup>*</sup><sub>0.6</sub>가 개별 행동의 품질을 시연 수준을 넘어 끌어올린다면, MEM은 개별 행동들이 수십 분에 걸친 일관된 과제 수행으로 엮이도록 한다. 두 접근이 하나의 모델에 결합된다면, &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 실현 가능해진다. 이는 본 서베이가 제시한 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이며, 앞서 식별한 미해결 과제들이 더 이상 이론적 추측이 아닌 공학적 도전으로 전환되고 있음을 보여준다.</p>
 
 <hr class="section-divider">
 <h1 id="sec-11결론">11. 결론</h1>
@@ -2588,7 +2588,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
   <a class="toc-card" href="#sec-10OpenProblemsandFutureProspects">
     <span class="sec-num">Sec 10-11</span>
     <h3>Open Problems, Cross-Survey Insights, Frontier Case Study, Conclusion</h3>
-    <div class="desc">11 core challenges + <strong>10 emergent cross-survey insights</strong> + <strong>&pi; series frontier case study (RECAP &amp; MEM)</strong> + 4 future axes</div>
+    <div class="desc">11 core challenges + <strong>10 emergent cross-survey insights</strong> + <strong>&pi; series frontier case study (&pi;<sup>*</sup><sub>0.6</sub> &amp; MEM)</strong> + 4 future axes</div>
     <div class="why"><strong>Why?</strong> After identifying open problems, the latest breakthroughs show how those challenges are being attacked&mdash;completing the &quot;theory&rarr;evidence&quot; narrative arc.</div>
   </a>
 </div>
@@ -3016,7 +3016,7 @@ Columns correspond to the 10 core topics of this unified survey.
 <h3 id="sec-DiscreteDiffusionMethod">Discrete Diffusion Method</h3>
 <p><strong>Discrete Diffusion VLAs</strong>: A novel paradigm proposed simultaneously by four independent studies at ICLR 2026. Unlike conventional diffusion methods that operate in continuous space, discrete diffusion is applied directly to tokenized action sequences, generating discrete tokens in parallel without the sequential generation of autoregressive methods. dVLA <a href="https://arxiv.org/abs/2509.25681" target="_blank" rel="noopener" class="ref-link">[65]</a>, DIVA, and UNIFIED DIFFUSION VLA belong to this category, reporting 95–98% success rates on LIBERO. This approach attempts to combine the interpretability of autoregressive methods with the multimodality of diffusion, and has emerged as one of the most active research directions in 2026.</p>
 <h3 id="sec-ReinforcementLearningRLMethod">Reinforcement Learning (RL) Method</h3>
-<p>The policy is directly optimized using a reward signal. Pure RL-based VLAs are rare, but the pattern of fine-tuning BC-pretrained VLAs with RL is rapidly emerging. Representative examples include GRPO (Group Relative Policy Optimization), RLVF (Reinforcement Learning from Visual Feedback), and RECAP <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>.</p>
+<p>The policy is directly optimized using a reward signal. Pure RL-based VLAs are rare, but the pattern of fine-tuning BC-pretrained VLAs with RL is rapidly emerging. Representative examples include GRPO (Group Relative Policy Optimization), RLVF (Reinforcement Learning from Visual Feedback), and &pi;<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>.</p>
 <h3 id="sec-HybridMethod">Hybrid Method</h3>
 <p>Combines the strengths of autoregressive and diffusion methods. HybridVLA <a href="https://arxiv.org/abs/2503.10631" target="_blank" rel="noopener" class="ref-link">[79]</a> proposes a dual-decoding structure in which high-level semantic tokens are generated autoregressively and low-level continuous actions are generated via diffusion. UniVLA <a href="https://arxiv.org/abs/2505.06111" target="_blank" rel="noopener" class="ref-link">[80]</a> combines latent world model representations and action generation within a single framework.</p>
 <h3 id="sec-SpecializedMethod">Specialized Method</h3>
@@ -4148,25 +4148,25 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <hr class="section-divider">
 <h2 id="sec-1013FrontierCaseStudy">10.13 Frontier Case Study: Two Breakthroughs from the &pi; Series (November 2025)</h2>
 
-<p>Sections 10.1&ndash;10.12 identified the core open problems and cross-survey insights for VLA research. How much concrete progress is actually being made on these challenges? In November 2025, Physical Intelligence (PI) simultaneously published two papers that provide the most tangible answer to this question. <strong>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> directly attacks the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3 and Insight 5, while <strong>&pi;<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> confronts the &quot;long-horizon tasks and memory absence&quot; problem from Section 10.4. Both papers build on the &pi;0.6 model (Gemma 3 4B VLM + 860M Action Expert) and break through two core VLA limitations&mdash;the performance ceiling of behavioral cloning and the absence of memory&mdash;at real-world scale.</p>
+<p>Sections 10.1&ndash;10.12 identified the core open problems and cross-survey insights for VLA research. How much concrete progress is actually being made on these challenges? In November 2025, Physical Intelligence (PI) simultaneously published two papers that provide the most tangible answer to this question. <strong>&pi;<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> directly attacks the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3 and Insight 5, while <strong>&pi;<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> confronts the &quot;long-horizon tasks and memory absence&quot; problem from Section 10.4. Both papers build on the &pi;0.6 model (Gemma 3 4B VLM + 860M Action Expert) and break through two core VLA limitations&mdash;the performance ceiling of behavioral cloning and the absence of memory&mdash;at real-world scale.</p>
 
-<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
-<h3 id="sec-RECAPen">10.13.1 &pi;<sup>*</sup><sub>0.6</sub> / RECAP: A VLA That Learns from Experience</h3>
+<!-- ─────────────── π*0.6 ─────────────── -->
+<h3 id="sec-RECAPen">10.13.1 &pi;<sup>*</sup><sub>0.6</sub>: A VLA That Learns from Experience</h3>
 <p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> &middot; Physical Intelligence &middot; 2025.11</p>
 
-<p><strong>RECAP (RL with Experience and Corrections via Advantage-conditioned Policies)</strong> is a general-purpose RL post-training framework that enables VLA models to self-improve through real-world deployment experience. While the RL post-training methods surveyed in Section 6.3 (VLA-RL, RIPT-VLA, ConRFT, etc.) were primarily validated on simulation benchmarks, RECAP represents a qualitative turning point by being the first to successfully demonstrate end-to-end RL training of a large-scale VLA on <em>real-world, long-horizon, complex manipulation tasks</em>.</p>
+<p>&pi;<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> is a general-purpose RL post-training framework, built on a method called <strong>RECAP (RL with Experience and Corrections via Advantage-conditioned Policies)</strong>, that enables VLA models to self-improve through real-world deployment experience. While the RL post-training methods surveyed in Section 6.3 (VLA-RL, RIPT-VLA, ConRFT, etc.) were primarily validated on simulation benchmarks, &pi;<sup>*</sup><sub>0.6</sub> represents a qualitative turning point by being the first to successfully demonstrate end-to-end RL training of a large-scale VLA on <em>real-world, long-horizon, complex manipulation tasks</em>.</p>
 
 <p><strong>Core Technical Innovation: Advantage Conditioning.</strong> Unlike prior VLA RL methods that use policy gradient&ndash;based extraction such as PPO or GRPO, RECAP adopts <em>advantage conditioning</em>&mdash;a fundamentally different policy extraction mechanism. The key idea proceeds as follows:</p>
 <p>(1) A <strong>distributional value function</strong> is trained separately. This value function uses a compact 670M-parameter VLM backbone and predicts the distribution of remaining steps to successful completion at each state (201 discrete bins). (2) The advantage value of each action is estimated from the value function and binarized into a text token &quot;Advantage: positive/negative&quot; appended to the VLA input. (3) The VLA is trained on all data (demonstrations + autonomous rollouts + human corrections) via advantage-conditioned supervised learning, but at inference time is always conditioned on &quot;Advantage: positive&quot; to extract the improved policy.</p>
 
-<p>The decisive advantage of this approach is its <strong>compatibility with Flow Matching&ndash;based VLAs</strong>. PPO/GRPO require explicit computation of log-likelihoods, which Flow Matching models cannot directly provide and must approximate. Advantage conditioning completely bypasses this issue, achieving policy improvement through simple conditional supervised learning. In experiments, RECAP significantly outperformed AWR and PPO-based methods trained on the same data.</p>
+<p>The decisive advantage of this approach is its <strong>compatibility with Flow Matching&ndash;based VLAs</strong>. PPO/GRPO require explicit computation of log-likelihoods, which Flow Matching models cannot directly provide and must approximate. Advantage conditioning completely bypasses this issue, achieving policy improvement through simple conditional supervised learning. In experiments, &pi;<sup>*</sup><sub>0.6</sub> significantly outperformed AWR and PPO-based methods trained on the same data.</p>
 
 <p><strong>Unifying Three Data Sources.</strong> RECAP combines (1) <strong>demonstration data</strong> (for initial SFT), (2) <strong>autonomous rollouts</strong> (robot&rsquo;s own attempts with success/failure labels), and (3) <strong>human corrections</strong> (human-gated DAgger&mdash;humans intervene during autonomous execution to correct mistakes) within a single framework. Human correction data always receives positive advantage, while the remaining data is assigned advantage based on the value function&rsquo;s estimates.</p>
 
 <p><strong>Real-World Results.</strong> &pi;<sup>*</sup><sub>0.6</sub> was validated on three complex tasks:</p>
 <div class="model-table">
 <table>
-<thead><tr><th>Task</th><th>Duration</th><th>RECAP Effect (throughput)</th><th>Success Rate</th><th>Continuous Operation</th></tr></thead>
+<thead><tr><th>Task</th><th>Duration</th><th>&pi;<sup>*</sup><sub>0.6</sub> Effect (throughput)</th><th>Success Rate</th><th>Continuous Operation</th></tr></thead>
 <tbody>
 <tr><td><strong>Espresso making</strong></td><td>~200s/trial</td><td>2&times;+ improvement</td><td>90%+</td><td>13 hours continuous</td></tr>
 <tr><td><strong>Laundry folding</strong> (11 types)</td><td>~500s/trial</td><td>2&times;+ improvement</td><td>~70% (hardest: button shirt)</td><td>2+ hours (in new home)</td></tr>
@@ -4175,9 +4175,9 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 </table>
 </div>
 
-<p>On the most challenging tasks, RECAP more than doubled throughput (successful completions per hour) and cut the failure rate roughly in half. Notably, a &quot;targeted failure removal&quot; experiment eliminated a specific failure mode (collar orientation error) to 97% success using only 600 autonomous trajectories over 2 iterations.</p>
+<p>On the most challenging tasks, &pi;<sup>*</sup><sub>0.6</sub> more than doubled throughput (successful completions per hour) and cut the failure rate roughly in half. Notably, a &quot;targeted failure removal&quot; experiment eliminated a specific failure mode (collar orientation error) to 97% success using only 600 autonomous trajectories over 2 iterations.</p>
 
-<p><strong>Significance in the Survey Context.</strong> RECAP is the most complete realization of the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3. Where prior work demonstrated the feasibility of RL post-training on simulation benchmarks (LIBERO, etc.), RECAP is the first to prove the practicality of end-to-end RL for <em>large-scale Flow Matching VLAs</em> on <em>real-world, long-horizon, complex tasks</em>. This signals that the development trajectory from LLMs&mdash;GPT-3 (pre-training) &rarr; InstructGPT (SFT) &rarr; ChatGPT (RLHF)&mdash;is now materializing in VLA research.</p>
+<p><strong>Significance in the Survey Context.</strong> &pi;<sup>*</sup><sub>0.6</sub> is the most complete realization of the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3. Where prior work demonstrated the feasibility of RL post-training on simulation benchmarks (LIBERO, etc.), &pi;<sup>*</sup><sub>0.6</sub> is the first to prove the practicality of end-to-end RL for <em>large-scale Flow Matching VLAs</em> on <em>real-world, long-horizon, complex tasks</em>. This signals that the development trajectory from LLMs&mdash;GPT-3 (pre-training) &rarr; InstructGPT (SFT) &rarr; ChatGPT (RLHF)&mdash;is now materializing in VLA research.</p>
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEMen">10.13.2 &pi;<sub>0.6</sub>-MEM: Multi-Scale Embodied Memory for VLAs</h3>
@@ -4215,7 +4215,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 
 <div class="model-table">
 <table>
-<thead><tr><th>Dimension</th><th>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</th><th>&pi;<sub>0.6</sub>-MEM</th></tr></thead>
+<thead><tr><th>Dimension</th><th>&pi;<sup>*</sup><sub>0.6</sub> [157]</th><th>&pi;<sub>0.6</sub>-MEM</th></tr></thead>
 <tbody>
 <tr><td><strong>Limitation addressed</strong></td><td>BC performance ceiling; inability to discover behavior beyond demonstrations</td><td>Memory absence; inability to handle long-horizon tasks; partial observability</td></tr>
 <tr><td><strong>Base model</strong></td><td>&pi;0.6 (Gemma 3 4B + 860M Action Expert)</td><td>&pi;0.6 (same)</td></tr>
@@ -4231,11 +4231,11 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <div class="chain-step"><strong>&pi;0</strong> (2024): First fusion of VLM + Flow Matching Action Expert</div>
 <div class="chain-step">&rarr; <strong>&pi;0.5</strong> (2025): Hierarchical VLM planning + &pi;0 execution, 30 min+ tasks</div>
 <div class="chain-step">&rarr; <strong>&pi;0.6</strong> (2025): Gemma 3 4B backbone + 860M Action Expert upgrade, KI training recipe</div>
-<div class="chain-step">&rarr; <strong>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Real-world RL post-training via advantage conditioning. <em>Breaking the BC ceiling</em></div>
+<div class="chain-step">&rarr; <strong>&pi;<sup>*</sup><sub>0.6</sub></strong> (2025.11): Real-world RL post-training via advantage conditioning. <em>Breaking the BC ceiling</em></div>
 <div class="chain-step">&rarr; <strong>&pi;<sub>0.6</sub>-MEM</strong> (2025): Multi-scale memory for 15 min+ long-horizon tasks. <em>Breaking the memory barrier</em></div>
 </div>
 
-<p>Taken together, PI&rsquo;s &pi; series is simultaneously pushing two core frontiers of VLA research: <strong>&quot;doing it better&quot; (RECAP)</strong> and <strong>&quot;doing it longer&quot; (MEM)</strong>. RECAP elevates individual action quality beyond demonstration level, while MEM weaves individual actions into coherent task execution spanning tens of minutes. If the two approaches were combined in a single model, a robot that &quot;self-improves at a 15-minute kitchen cleanup through trial and error&quot; becomes feasible. This represents the most concrete advancement toward the &quot;deployment readiness&quot; paradigm put forth in this survey, demonstrating that the open problems identified above are transitioning from theoretical speculation to engineering challenges.</p>
+<p>Taken together, PI&rsquo;s &pi; series is simultaneously pushing two core frontiers of VLA research: <strong>&quot;doing it better&quot; (&pi;<sup>*</sup><sub>0.6</sub>)</strong> and <strong>&quot;doing it longer&quot; (MEM)</strong>. &pi;<sup>*</sup><sub>0.6</sub> elevates individual action quality beyond demonstration level, while MEM weaves individual actions into coherent task execution spanning tens of minutes. If the two approaches were combined in a single model, a robot that &quot;self-improves at a 15-minute kitchen cleanup through trial and error&quot; becomes feasible. This represents the most concrete advancement toward the &quot;deployment readiness&quot; paradigm put forth in this survey, demonstrating that the open problems identified above are transitioning from theoretical speculation to engineering challenges.</p>
 
 <hr class="section-divider">
 <h1 id="sec-11Conclusion">11. Conclusion</h1>
@@ -4623,7 +4623,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
   <a class="toc-card" href="#sec-10미해결문제와미래전망">
     <span class="sec-num">Sec 10-11</span>
     <h3>미해결 문제, 통합 인사이트, 최전선 사례, 결론</h3>
-    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(RECAP &amp; MEM)</strong> + 미래 4대 축</div>
+    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(π<sup>*</sup><sub>0.6</sub> &amp; MEM)</strong> + 미래 4대 축</div>
     <div class="why"><strong>왜?</strong> 미해결 과제를 식별한 뒤, 최신 돌파구가 그 과제들을 어떻게 공략하는지 보여주어 &quot;이론→실증&quot;의 서사를 완성한다.</div>
   </a>
 </div><!-- toc-diagram -->
@@ -5120,7 +5120,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p>자, 여기서 최근에 매우 흥미로운 전개가 있었습니다. <strong>이산 디퓨전(Discrete Diffusion) VLA</strong>인데, ICLR 2026에서 4개의 독립 연구가 동시에 제안한 새로운 패러다임입니다. 4개 팀이 동시에 같은 아이디어를 낸다는 건, 그 아이디어가 자연스러운 다음 스텝이었다는 방증이기도 하죠.</p>
 <p>이게 뭐냐면, 기존 디퓨전이 연속 공간에서 작동하는 것과 달리, 이산 디퓨전은 토큰화된 행동 시퀀스에 직접 적용됩니다. 자기회귀의 순차 생성 없이도 이산 토큰을 병렬로 생성할 수 있거든요. dVLA <a href="https://arxiv.org/abs/2509.25681" target="_blank" rel="noopener" class="ref-link">[65]</a>, DIVA, UNIFIED DIFFUSION VLA 등이 이 범주에 속하며, LIBERO에서 95-98% 성공률을 보고했습니다. 자기회귀의 해석 가능성과 디퓨전의 다중 모드성을 결합하려는 시도로, 2026년 가장 활발한 연구 방향 중 하나입니다.</p>
 <h3 id="sec-강화학습RL기반방식">강화학습(RL) 기반 방식</h3>
-<p>보상 신호(reward signal)를 기반으로 정책을 직접 최적화합니다. 순수 RL 기반 VLA는 드문데, 그 이유는 아시다시피 로봇에서 순수 RL은 샘플 효율성 문제가 심각하기 때문입니다. 하지만 BC로 사전학습된 VLA를 RL로 미세조정하는 패턴이 급부상하고 있습니다. GRPO(Group Relative Policy Optimization), RLVF(Reinforcement Learning from Visual Feedback), RECAP <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> 등이 대표적입니다.</p>
+<p>보상 신호(reward signal)를 기반으로 정책을 직접 최적화합니다. 순수 RL 기반 VLA는 드문데, 그 이유는 아시다시피 로봇에서 순수 RL은 샘플 효율성 문제가 심각하기 때문입니다. 하지만 BC로 사전학습된 VLA를 RL로 미세조정하는 패턴이 급부상하고 있습니다. GRPO(Group Relative Policy Optimization), RLVF(Reinforcement Learning from Visual Feedback), π<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> 등이 대표적입니다.</p>
 <h3 id="sec-하이브리드Hybrid방식">하이브리드(Hybrid) 방식</h3>
 <p>여기서 핵심은, 자기회귀와 디퓨전의 장점을 굳이 하나만 택할 이유가 없다는 발상입니다. HybridVLA <a href="https://arxiv.org/abs/2503.10631" target="_blank" rel="noopener" class="ref-link">[79]</a>는 고수준 의미 토큰은 AR로 생성하고, 저수준 연속 행동은 디퓨전으로 생성하는 이중 디코딩 구조를 제안했습니다. UniVLA <a href="https://arxiv.org/abs/2505.06111" target="_blank" rel="noopener" class="ref-link">[80]</a>는 월드 모델의 잠재 표현과 행동 생성을 단일 프레임워크에서 결합합니다.</p>
 <h3 id="sec-특수도메인Specialized방식">특수 도메인(Specialized) 방식</h3>
@@ -6290,13 +6290,13 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <hr class="section-divider">
 <h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
 
-<p>자, 지금까지 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 쭉 살펴봤는데요. 그러면 자연스럽게 드는 질문이 있죠 — &quot;그래서 진짜로 얼마나 풀리고 있는 건데?&quot; 2025년 11월에 Physical Intelligence(PI)가 동시에 발표한 두 편의 논문이 이 질문에 대한 가장 구체적인 답을 줍니다. <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 우리가 6.3절과 Insight 5에서 이야기한 &quot;BC에서 RL로의 전환&quot;을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 &quot;장기 과제와 메모리 부재&quot;를 각각 정면으로 공략하는 거예요. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하고, VLA의 두 가지 핵심 한계 — &quot;BC의 성능 천장&quot;과 &quot;메모리 부재&quot; — 를 실세계 규모에서 돌파합니다.</p>
+<p>자, 지금까지 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 쭉 살펴봤는데요. 그러면 자연스럽게 드는 질문이 있죠 — &quot;그래서 진짜로 얼마나 풀리고 있는 건데?&quot; 2025년 11월에 Physical Intelligence(PI)가 동시에 발표한 두 편의 논문이 이 질문에 대한 가장 구체적인 답을 줍니다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 우리가 6.3절과 Insight 5에서 이야기한 &quot;BC에서 RL로의 전환&quot;을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 &quot;장기 과제와 메모리 부재&quot;를 각각 정면으로 공략하는 거예요. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하고, VLA의 두 가지 핵심 한계 — &quot;BC의 성능 천장&quot;과 &quot;메모리 부재&quot; — 를 실세계 규모에서 돌파합니다.</p>
 
-<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
-<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub> / RECAP: 경험으로부터 배우는 VLA</h3>
+<!-- ─────────────── π*0.6 ─────────────── -->
+<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub>: 경험으로부터 배우는 VLA</h3>
 <p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> · Physical Intelligence · 2025.11</p>
 
-<p><strong>RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)</strong>은 VLA 모델이 실세계 경험을 통해 스스로 나아지게 하는 범용 RL 후처리 프레임워크입니다. 6.3절에서 다뤘던 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등) 기억하시죠? 그 연구들은 대부분 시뮬레이션 벤치마크에서만 검증됐었어요. RECAP은 다릅니다 — <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 처음으로 성공시킨 거예요. 질적 전환점이라고 할 수 있습니다.</p>
+<p>π<sup>*</sup><sub>0.6</sub> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)이라는 방법론을 통해 VLA 모델이 실세계 경험으로부터 스스로 나아지게 하는 범용 RL 후처리 프레임워크입니다. 6.3절에서 다뤘던 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등) 기억하시죠? 그 연구들은 대부분 시뮬레이션 벤치마크에서만 검증됐었어요. π<sup>*</sup><sub>0.6</sub>는 다릅니다 — <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 처음으로 성공시킨 거예요. 질적 전환점이라고 할 수 있습니다.</p>
 
 <p><strong>핵심 기술 혁신: Advantage Conditioning.</strong> 여기서 정말 영리한 부분이 나옵니다. 기존 VLA RL 방법들은 PPO나 GRPO 같은 정책 경사(policy gradient) 기반이었잖아요? RECAP은 완전히 다른 길을 갑니다 — <em>advantage conditioning</em>이라는 방식이에요.</p>
 <p>작동 원리를 단계별로 보면: (1) 먼저 <strong>분포적 가치 함수</strong>를 따로 학습합니다. 670M짜리 소형 VLM 백본을 써서, 각 상태에서 &quot;성공까지 몇 스텝 남았나&quot;를 분포로 예측하는 거예요(201개 이산 bin). (2) 이 가치 함수로 각 행동의 <strong>advantage 값</strong>을 추정하고, &quot;Advantage: positive&quot; 또는 &quot;negative&quot;라는 텍스트 토큰을 VLA 입력에 추가합니다. (3) 학습 때는 모든 데이터에 대해 이 advantage 조건부 지도학습을 하고, 추론 때는 항상 &quot;Advantage: positive&quot;로 조건화해서 개선된 정책을 뽑아내는 겁니다.</p>
@@ -6308,7 +6308,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p><strong>실세계 성과.</strong> 자, 숫자를 봅시다:</p>
 <div class="model-table">
 <table>
-<thead><tr><th>태스크</th><th>소요 시간</th><th>RECAP 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
+<thead><tr><th>태스크</th><th>소요 시간</th><th>π<sup>*</sup><sub>0.6</sub> 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
 <tbody>
 <tr><td><strong>에스프레소 제조</strong></td><td>~200초/회</td><td>2배 이상 향상</td><td>90%+</td><td>13시간 연속</td></tr>
 <tr><td><strong>다양한 빨래 접기</strong>(11종)</td><td>~500초/회</td><td>2배 이상 향상</td><td>~70%(버튼셔츠 기준)</td><td>2시간+ (새 집에서)</td></tr>
@@ -6319,7 +6319,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 
 <p>throughput(시간당 성공 횟수)이 2배 이상 올라가고, 실패율은 절반으로 떨어졌어요. 특히 인상적인 건 &quot;targeted failure removal&quot; 실험인데, 옷깃 방향 오류라는 특정 실패 모드를 600개 자율 궤적으로 단 2회 반복만에 97% 성공률까지 제거했습니다.</p>
 
-<p><strong>왜 중요한가.</strong> RECAP은 6.3절에서 이야기한 &quot;BC→RL 전환&quot;의 가장 완성된 형태입니다. LLM 세계에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 진화한 것처럼, VLA 세계에서도 같은 경로가 현실이 되고 있는 거예요. 시뮬레이션이 아니라 실세계에서, 장난감 태스크가 아니라 에스프레소 13시간 연속 제조에서요.</p>
+<p><strong>왜 중요한가.</strong> π<sup>*</sup><sub>0.6</sub>는 6.3절에서 이야기한 &quot;BC→RL 전환&quot;의 가장 완성된 형태입니다. LLM 세계에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 진화한 것처럼, VLA 세계에서도 같은 경로가 현실이 되고 있는 거예요. 시뮬레이션이 아니라 실세계에서, 장난감 태스크가 아니라 에스프레소 13시간 연속 제조에서요.</p>
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
@@ -6357,7 +6357,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 
 <div class="model-table">
 <table>
-<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> / RECAP</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
+<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> [157]</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
 <tbody>
 <tr><td><strong>해결하는 한계</strong></td><td>BC의 성능 천장, 시연 밖 행동 발견 불가</td><td>메모리 부재, 장시간 과제 불가, 부분 관측성</td></tr>
 <tr><td><strong>기반 모델</strong></td><td>π0.6 (Gemma 3 4B + 860M Action Expert)</td><td>π0.6 (동일)</td></tr>
@@ -6373,11 +6373,11 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <div class="chain-step"><strong>π0</strong> (2024): VLM + Flow Matching Action Expert의 첫 결합</div>
 <div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
 <div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드</div>
-<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
+<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub></strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
 <div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
 </div>
 
-<p>정리하면요, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있습니다: <strong>&quot;더 잘하기&quot;(RECAP)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. RECAP이 개별 행동의 품질을 시연 수준 너머로 끌어올린다면, MEM은 그 행동들을 수십 분에 걸친 일관된 과제 수행으로 엮어줍니다. 두 접근이 하나의 모델에 합쳐진다면? &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 현실이 됩니다. 이건 본 서베이가 줄곧 이야기해 온 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이에요. 앞서 식별한 미해결 과제들이 이제 더 이상 이론적 추측이 아니라, 실제 공학적 도전으로 전환되고 있다는 증거입니다.</p>
+<p>정리하면요, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있습니다: <strong>&quot;더 잘하기&quot;(π<sup>*</sup><sub>0.6</sub>)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. π<sup>*</sup><sub>0.6</sub>가 개별 행동의 품질을 시연 수준 너머로 끌어올린다면, MEM은 그 행동들을 수십 분에 걸친 일관된 과제 수행으로 엮어줍니다. 두 접근이 하나의 모델에 합쳐진다면? &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 현실이 됩니다. 이건 본 서베이가 줄곧 이야기해 온 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이에요. 앞서 식별한 미해결 과제들이 이제 더 이상 이론적 추측이 아니라, 실제 공학적 도전으로 전환되고 있다는 증거입니다.</p>
 
 <hr class="section-divider">
 <h1 id="sec-11결론">11. 결론</h1>
