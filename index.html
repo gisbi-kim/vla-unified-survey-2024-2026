@@ -528,9 +528,9 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
   </a>
   <a class="toc-card" href="#sec-10미해결문제와미래전망">
     <span class="sec-num">Sec 10-11</span>
-    <h3>미해결 문제, 통합 인사이트, 결론</h3>
-    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + 미래 4대 축</div>
-    <div class="why"><strong>왜?</strong> 본 문서의 최종 산출물. 개별 서베이 어디에도 없는, 교차 통합에서만 도출되는 <em>새로운</em> 인사이트를 제공한다.</div>
+    <h3>미해결 문제, 통합 인사이트, 최전선 사례, 결론</h3>
+    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(RECAP &amp; MEM)</strong> + 미래 4대 축</div>
+    <div class="why"><strong>왜?</strong> 미해결 과제를 식별한 뒤, 최신 돌파구가 그 과제들을 어떻게 공략하는지 보여주어 &quot;이론→실증&quot;의 서사를 완성한다.</div>
   </a>
 </div><!-- toc-diagram -->
 
@@ -2111,6 +2111,99 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <p>2026년 현재 VLA 분야의 가장 뚜렷한 분단선은 비공개 프런티어 모델(Gemini Robotics, π0.5)과 오픈 웨이트 연구 모델 사이의 실세계 일반화 격차이다. 시뮬레이션 벤치마크(LIBERO, CALVIN)에서 양쪽의 성능이 수렴하고 있음에도, 실세계 제로샷 일반화에서는 여전히 큰 격차가 존재한다. RoboArena 리더보드에서 경쟁력 있는 제로샷 행동을 보이는 것은 π 계열 모델뿐이라는 분석이 있다(Reuss, 2026).</p>
 <p>이 격차의 원인으로는 세 가지가 지목된다: (1) <strong>데이터 품질·다양성 격차</strong> — 프런티어 랩의 비공개 데이터가 공개 데이터셋보다 품질과 다양성이 우수, (2) <strong>벤치마크 천장 효과</strong> — 시뮬레이션 벤치마크의 포화로 실제 진전이 가려지는 현상, (3) <strong>인프라 규모 격차</strong> — 연구실 규모 vs 산업 규모의 학습 인프라 차이.</p>
 <p>ICLR 2026에서는 데이터 품질 큐레이션과 인컨텍스트 학습이 가장 과소 대표된 연구 방향으로 식별되었으며, 이 두 방향이 격차 해소의 열쇠가 될 수 있다. 이 문제는 10.1절의 데이터 병목과 10.2절의 일반화 벽 모두와 긴밀히 연결되며, 오픈소스 커뮤니티의 핵심 도전 과제이다.</p>
+
+<hr class="section-divider">
+<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
+
+<p>앞선 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 도출했다. 그렇다면 이 과제들에 대해 실제로 얼마나 진전이 이루어지고 있는가? 2025년 11월, Physical Intelligence(PI)가 동시에 발표한 두 논문은 이 질문에 대한 가장 구체적인 답변을 제공한다. <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong>은 6.3절과 Insight 5에서 논의한 "BC→RL 전환"을, <strong>π<sub>0.6</sub>-MEM</strong>은 10.4절의 "장기 과제와 메모리 부재"를 각각 정면으로 공략한다. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하며, 각각 VLA의 핵심 한계인 "BC의 성능 천장"과 "메모리 부재"를 실세계 규모에서 돌파한다.</p>
+
+<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
+<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub> / RECAP: 경험으로부터 배우는 VLA</h3>
+<p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[arXiv:2511.14759]</a> · Physical Intelligence · 2025.11</p>
+
+<p><strong>RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)</strong>은 VLA 모델이 실세계 배포 경험을 통해 스스로 개선할 수 있도록 하는 범용 RL 후처리 프레임워크이다. 6.3절에서 다룬 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등)이 대부분 시뮬레이션 벤치마크에서의 검증에 머문 반면, RECAP은 <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 최초로 성공적으로 시연했다는 점에서 질적 전환점이다.</p>
+
+<p><strong>핵심 기술 혁신: Advantage Conditioning.</strong> 기존 VLA RL 후처리 방법들이 PPO나 GRPO 같은 정책 경사(policy gradient) 기반 추출을 사용한 것과 달리, RECAP은 <em>advantage conditioning</em>이라는 근본적으로 다른 정책 추출 방식을 채택한다. 핵심 아이디어는 다음과 같다:</p>
+<p>(1) <strong>분포적 가치 함수(distributional value function)</strong>를 별도로 학습한다. 이 가치 함수는 670M 파라미터의 소형 VLM 백본을 사용하며, 각 상태에서 성공적 완료까지의 남은 스텝 수를 분포로 예측한다(201개 이산 bin). (2) 가치 함수로부터 각 행동의 <strong>advantage 값</strong>을 추정하고, 이를 이진화하여 &quot;Advantage: positive/negative&quot;라는 텍스트 토큰을 VLA 입력에 추가한다. (3) VLA는 모든 데이터(시연 + 자율 롤아웃 + 인간 교정)에 대해 advantage 조건부 지도학습으로 학습하되, 추론 시에는 항상 &quot;Advantage: positive&quot;로 조건화하여 개선된 정책을 추출한다.</p>
+
+<p>이 접근법의 결정적 장점은 <strong>Flow Matching 기반 VLA와의 호환성</strong>이다. PPO/GRPO는 log-likelihood의 명시적 계산을 요구하는데, Flow Matching 모델은 이를 직접 제공하지 못하여 근사가 필요하다. Advantage conditioning은 이 문제를 완전히 우회하여, 단순한 조건부 지도학습만으로 정책 개선을 달성한다. 실험에서 RECAP은 동일한 데이터로 학습한 AWR 및 PPO 기반 방법을 크게 능가했다.</p>
+
+<p><strong>세 가지 데이터 소스의 통합.</strong> RECAP은 (1) <strong>시연 데이터</strong>(초기 SFT용), (2) <strong>자율 롤아웃</strong>(로봇이 스스로 수행한 시도, 성공/실패 레이블 포함), (3) <strong>인간 교정</strong>(human-gated DAgger 방식, 자율 실행 중 인간이 개입하여 실수를 교정)을 하나의 프레임워크 안에서 결합한다. 인간 교정 데이터에는 항상 positive advantage를 부여하고, 나머지 데이터는 가치 함수의 추정에 따라 advantage를 할당한다.</p>
+
+<p><strong>실세계 성과.</strong> π<sup>*</sup><sub>0.6</sub>는 다음 세 가지 복합 태스크에서 검증되었다:</p>
+<div class="model-table">
+<table>
+<thead><tr><th>태스크</th><th>소요 시간</th><th>RECAP 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
+<tbody>
+<tr><td><strong>에스프레소 제조</strong></td><td>~200초/회</td><td>2배 이상 향상</td><td>90%+</td><td>13시간 연속</td></tr>
+<tr><td><strong>다양한 빨래 접기</strong>(11종)</td><td>~500초/회</td><td>2배 이상 향상</td><td>~70%(가장 어려운 버튼셔츠 기준)</td><td>2시간+ (새 집에서)</td></tr>
+<tr><td><strong>박스 조립</strong>(공장 배포)</td><td>~600초/회</td><td>2배 향상(2회 반복 후)</td><td>~90%</td><td>공장 실배포</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>가장 어려운 태스크에서 RECAP은 throughput(시간당 성공 완료 수)을 2배 이상 높이고, 실패율을 약 절반으로 줄였다. 특히 &quot;targeted failure removal&quot; 실험에서는 특정 실패 모드(옷깃 방향 오류)를 600개 자율 궤적 × 2회 반복만으로 97% 성공률까지 제거하는 데 성공했다.</p>
+
+<p><strong>서베이 맥락에서의 의의.</strong> RECAP은 6.3절에서 논의한 &quot;BC→RL 전환&quot;의 가장 완성된 실현이다. 기존 연구들이 시뮬레이션 벤치마크(LIBERO 등)에서 RL 후처리의 가능성을 입증했다면, RECAP은 <em>실세계 장시간 복합 태스크</em>에서 <em>대규모 Flow Matching VLA</em>에 대한 end-to-end RL의 실용성을 최초로 입증했다. 이는 LLM 분야에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 이어진 발전 경로가 VLA에서도 현실화되고 있음을 의미한다.</p>
+
+<!-- ─────────────── π0.6-MEM ─────────────── -->
+<h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
+<p><a href="https://pi.website/research/memory" target="_blank" rel="noopener" class="ref-link">[PI Research: Memory]</a> · Physical Intelligence · 2025</p>
+
+<p><strong>MEM(Multi-Scale Embodied Memory)</strong>은 VLA에 다중 모달·다중 시간 스케일의 메모리를 부여하는 시스템이다. 10.4절에서 &quot;장기 과제와 계층적 추론&quot;을 핵심 미해결 과제로 식별했는데, MEM은 이 문제에 대한 가장 직접적인 해법을 제시한다.</p>
+
+<p><strong>핵심 통찰: 메모리의 이중 표현.</strong> 로봇이 &quot;주방 전체를 정리하라&quot;는 15분짜리 태스크를 수행할 때, 필요한 메모리는 두 가지 성격이 전혀 다르다. (1) <em>단기 메모리</em>: 최근 몇 초간의 시각 정보(팔이 물체를 가려서 보이지 않을 때, 실패한 파지 전략을 기억할 때), (2) <em>장기 메모리</em>: 수 분에 걸친 의미론적 이벤트(어떤 재료를 이미 꺼냈는지, 어떤 서랍을 열었는지). MEM의 핵심 통찰은 이 두 종류의 메모리를 <em>서로 다른 모달리티</em>로 표현해야 한다는 것이다.</p>
+
+<p><strong>아키텍처 구성요소:</strong></p>
+<p>(1) <strong>단기 비디오 메모리 (Video Encoder).</strong> 기존 ViT를 확장하여 비디오 입력을 처리하되, <em>새로운 학습 파라미터를 추가하지 않는다</em>. 4번째 레이어마다 공간 어텐션(spatial attention)에 시간 어텐션(causal temporal attention)을 추가하는 space-time separable attention 구조를 사용한다. 과거 타임스텝의 토큰은 상위 레이어에서 드롭하여, VLA 백본에 전달되는 토큰 수를 단일 프레임 VLA와 동일하게 유지한다. 결과적으로 16프레임 입력에서도 추론 지연이 300ms 실시간 제약 이내에 머무른다(나이브 방식은 4초 이상 소요).</p>
+<p>(2) <strong>장기 언어 메모리 (Language Memory).</strong> 고수준 정책이 과거 의미론적 이벤트를 자연어 요약(m<sub>t</sub>)으로 압축하고, 매 스텝 이를 점진적으로 업데이트(m<sub>t+1</sub>)한다. 핵심은 <em>압축</em>: &quot;밝은 초록 그릇, 진한 파란 그릇, 밝은 노란 그릇을 윗칸 오른쪽 캐비닛에 넣었다&quot; → &quot;세 개의 그릇을 윗칸 오른쪽 캐비닛에 넣었다&quot;로 불필요한 정보를 제거한다. 이는 학습-추론 분포 불일치를 줄이는 데 결정적으로 중요하다.</p>
+
+<p><strong>핵심 설계 원칙: 사전학습된 VLM 가중치로부터 초기화.</strong> 비디오 인코더는 K=1(단일 이미지)일 때 기존 VLM과 정확히 동일한 초기화를 보장하도록 설계되었다(시간 위치 인코딩의 t=0 값을 0으로 설정). 이 덕분에 기존 VLM의 사전학습 지식을 완벽히 보존하면서 메모리 능력을 추가할 수 있다. 실험에서 사전학습 없이 후처리 단계에서만 메모리를 도입한 경우 성능이 현저히 저하되어, 다양한 데이터로의 메모리 사전학습이 핵심임이 확인되었다.</p>
+
+<p><strong>실세계 성과.</strong></p>
+<div class="model-table">
+<table>
+<thead><tr><th>능력</th><th>태스크 예시</th><th>결과</th></tr></thead>
+<tbody>
+<tr><td><strong>15분 장시간 태스크</strong></td><td>레시피 재료 준비, 주방 전체 청소, 그릴드 치즈 샌드위치 조리</td><td>메모리 없는 π0.6 대비 과제 진행률 2-4배 향상</td></tr>
+<tr><td><strong>인컨텍스트 적응</strong></td><td>젓가락 파지 높이 조정, 냉장고 문 열기 방향 전환</td><td>성공률 +11%~+62% (메모리 없는 모델 대비)</td></tr>
+<tr><td><strong>부분 관측성 처리</strong></td><td>서랍 속 물체 위치 기억, 장보기 봉투 내용물 추적, 커피 스쿱 카운팅</td><td>모든 핵심 메모리 능력에서 유일하게 강한 성능</td></tr>
+<tr><td><strong>비메모리 태스크 성능</strong></td><td>셔츠 접기, 침대 정리, 박스 조립 등</td><td>메모리 없는 π0.6와 동등 (메모리 추가로 인한 성능 저하 없음)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>특히 주목할 점은, 기존 연구에서 반복적으로 보고된 <em>causal confusion(인과 혼동)</em> 문제, 즉 메모리를 추가하면 오히려 성능이 저하되는 현상이 π<sub>0.6</sub>-MEM에서는 관찰되지 않았다는 것이다. 이는 다양한 최적성·속도·제어 주파수를 포함하는 대규모 사전학습 데이터 혼합이 spurious correlation을 방지했기 때문으로 분석된다.</p>
+
+<p><strong>서베이 맥락에서의 의의.</strong> MEM은 4.2절(두뇌 모듈)의 추론 패러다임과 10.4절(장기 과제)의 핵심 미해결 과제에 직접 응답한다. π0.5가 &quot;VLM 계획기 + VLA 실행기&quot;라는 계층적 분리로 장시간 작업을 접근했다면, MEM은 <em>메모리</em>라는 직교적 차원에서 같은 문제를 해결한다. 계층적 계획이 &quot;무엇을 할지&quot;를 분리하는 것이라면, 메모리는 &quot;무엇을 했는지&quot;를 기억하는 것이다. 이 두 접근은 상호 배타적이 아니라 상보적이며, 향후 결합될 가능성이 높다.</p>
+
+<!-- ─────────────── 통합 비교 및 종합 ─────────────── -->
+<h3 id="sec-10133통합비교">10.13.3 두 논문의 통합적 의의</h3>
+
+<div class="model-table">
+<table>
+<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> / RECAP</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
+<tbody>
+<tr><td><strong>해결하는 한계</strong></td><td>BC의 성능 천장, 시연 밖 행동 발견 불가</td><td>메모리 부재, 장시간 과제 불가, 부분 관측성</td></tr>
+<tr><td><strong>기반 모델</strong></td><td>π0.6 (Gemma 3 4B + 860M Action Expert)</td><td>π0.6 (동일)</td></tr>
+<tr><td><strong>핵심 혁신</strong></td><td>Advantage conditioning: Flow Matching VLA에 적용 가능한 RL 정책 추출</td><td>Video encoder (추가 파라미터 없음) + 압축형 언어 메모리</td></tr>
+<tr><td><strong>데이터 소스</strong></td><td>시연 + 자율 롤아웃 + 인간 교정(DAgger)</td><td>로봇 시연 + 비디오 데이터 + 비전-언어 데이터</td></tr>
+<tr><td><strong>대표 성과</strong></td><td>에스프레소 13시간 연속, 실패율 50% 감소</td><td>주방 청소·그릴드 치즈 등 15분 태스크 해결</td></tr>
+<tr><td><strong>서베이 연결</strong></td><td>6.3절 (RL 후처리), Insight 5</td><td>10.4절 (장기 과제), 4.2절 (추론)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="motivation-chain"><div class="chain-title">Motivation Chain: π 시리즈의 진화 (업데이트)</div>
+<div class="chain-step"><strong>π0</strong> (2024): VLM + Flow Matching Action Expert의 첫 결합</div>
+<div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
+<div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드, KI 학습 레시피</div>
+<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
+<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
+</div>
+
+<p>이 두 논문을 종합하면, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있다: <strong>&quot;더 잘하기&quot;(RECAP)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. RECAP이 개별 행동의 품질을 시연 수준을 넘어 끌어올린다면, MEM은 개별 행동들이 수십 분에 걸친 일관된 과제 수행으로 엮이도록 한다. 두 접근이 하나의 모델에 결합된다면, &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 실현 가능해진다. 이는 본 서베이가 제시한 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이며, 앞서 식별한 미해결 과제들이 더 이상 이론적 추측이 아닌 공학적 도전으로 전환되고 있음을 보여준다.</p>
+
 <hr class="section-divider">
 <h1 id="sec-11결론">11. 결론</h1>
 <h2 id="sec-111VLA통합지능의실현">11.1 VLA -- 통합 지능의 실현</h2>
@@ -2493,9 +2586,9 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
   </a>
   <a class="toc-card" href="#sec-10OpenProblemsandFutureProspects">
     <span class="sec-num">Sec 10-11</span>
-    <h3>Open Problems, Cross-Survey Insights, Conclusion</h3>
-    <div class="desc">11 core challenges + <strong>10 emergent cross-survey insights</strong> + 4 future axes</div>
-    <div class="why"><strong>Why?</strong> The document's ultimate deliverable: insights that exist in <em>no individual survey</em>, emerging only from cross-synthesis.</div>
+    <h3>Open Problems, Cross-Survey Insights, Frontier Case Study, Conclusion</h3>
+    <div class="desc">11 core challenges + <strong>10 emergent cross-survey insights</strong> + <strong>&pi; series frontier case study (RECAP &amp; MEM)</strong> + 4 future axes</div>
+    <div class="why"><strong>Why?</strong> After identifying open problems, the latest breakthroughs show how those challenges are being attacked&mdash;completing the &quot;theory&rarr;evidence&quot; narrative arc.</div>
   </a>
 </div>
 
@@ -4050,6 +4143,99 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p>As of 2026, the most prominent dividing line in the VLA field is the real-world generalization gap between proprietary frontier models (Gemini Robotics, π0.5 <a href="https://arxiv.org/abs/2503.01222" target="_blank" rel="noopener" class="ref-link">[31]</a>) and open-weight research models. Although performance on simulation benchmarks (LIBERO, CALVIN) is converging between the two camps, a substantial gap persists in real-world zero-shot generalization. An analysis suggests that only the pi-family of models demonstrates competitive zero-shot behavior on the RoboArena leaderboard (Reuss, 2026).</p>
 <p>Three factors are identified as causes of this gap: (1) <strong>Data quality and diversity gap</strong> -- the proprietary data of frontier labs exceeds public datasets in both quality and diversity; (2) <strong>Benchmark ceiling effect</strong> -- the saturation of simulation benchmarks masks genuine progress; and (3) <strong>Infrastructure scale gap</strong> -- the difference between laboratory-scale and industrial-scale training infrastructure.</p>
 <p>At ICLR 2026, data quality curation and in-context learning were identified as the most underrepresented research directions, and these two directions may hold the key to closing the gap. This problem is closely linked to both the data bottleneck of Section 10.1 and the generalization wall of Section 10.2, and constitutes a central challenge for the open-source community.</p>
+
+<hr class="section-divider">
+<h2 id="sec-1013FrontierCaseStudy">10.13 Frontier Case Study: Two Breakthroughs from the &pi; Series (November 2025)</h2>
+
+<p>Sections 10.1&ndash;10.12 identified the core open problems and cross-survey insights for VLA research. How much concrete progress is actually being made on these challenges? In November 2025, Physical Intelligence (PI) simultaneously published two papers that provide the most tangible answer to this question. <strong>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</strong> directly attacks the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3 and Insight 5, while <strong>&pi;<sub>0.6</sub>-MEM</strong> confronts the &quot;long-horizon tasks and memory absence&quot; problem from Section 10.4. Both papers build on the &pi;0.6 model (Gemma 3 4B VLM + 860M Action Expert) and break through two core VLA limitations&mdash;the performance ceiling of behavioral cloning and the absence of memory&mdash;at real-world scale.</p>
+
+<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
+<h3 id="sec-RECAPen">10.13.1 &pi;<sup>*</sup><sub>0.6</sub> / RECAP: A VLA That Learns from Experience</h3>
+<p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[arXiv:2511.14759]</a> &middot; Physical Intelligence &middot; 2025.11</p>
+
+<p><strong>RECAP (RL with Experience and Corrections via Advantage-conditioned Policies)</strong> is a general-purpose RL post-training framework that enables VLA models to self-improve through real-world deployment experience. While the RL post-training methods surveyed in Section 6.3 (VLA-RL, RIPT-VLA, ConRFT, etc.) were primarily validated on simulation benchmarks, RECAP represents a qualitative turning point by being the first to successfully demonstrate end-to-end RL training of a large-scale VLA on <em>real-world, long-horizon, complex manipulation tasks</em>.</p>
+
+<p><strong>Core Technical Innovation: Advantage Conditioning.</strong> Unlike prior VLA RL methods that use policy gradient&ndash;based extraction such as PPO or GRPO, RECAP adopts <em>advantage conditioning</em>&mdash;a fundamentally different policy extraction mechanism. The key idea proceeds as follows:</p>
+<p>(1) A <strong>distributional value function</strong> is trained separately. This value function uses a compact 670M-parameter VLM backbone and predicts the distribution of remaining steps to successful completion at each state (201 discrete bins). (2) The advantage value of each action is estimated from the value function and binarized into a text token &quot;Advantage: positive/negative&quot; appended to the VLA input. (3) The VLA is trained on all data (demonstrations + autonomous rollouts + human corrections) via advantage-conditioned supervised learning, but at inference time is always conditioned on &quot;Advantage: positive&quot; to extract the improved policy.</p>
+
+<p>The decisive advantage of this approach is its <strong>compatibility with Flow Matching&ndash;based VLAs</strong>. PPO/GRPO require explicit computation of log-likelihoods, which Flow Matching models cannot directly provide and must approximate. Advantage conditioning completely bypasses this issue, achieving policy improvement through simple conditional supervised learning. In experiments, RECAP significantly outperformed AWR and PPO-based methods trained on the same data.</p>
+
+<p><strong>Unifying Three Data Sources.</strong> RECAP combines (1) <strong>demonstration data</strong> (for initial SFT), (2) <strong>autonomous rollouts</strong> (robot&rsquo;s own attempts with success/failure labels), and (3) <strong>human corrections</strong> (human-gated DAgger&mdash;humans intervene during autonomous execution to correct mistakes) within a single framework. Human correction data always receives positive advantage, while the remaining data is assigned advantage based on the value function&rsquo;s estimates.</p>
+
+<p><strong>Real-World Results.</strong> &pi;<sup>*</sup><sub>0.6</sub> was validated on three complex tasks:</p>
+<div class="model-table">
+<table>
+<thead><tr><th>Task</th><th>Duration</th><th>RECAP Effect (throughput)</th><th>Success Rate</th><th>Continuous Operation</th></tr></thead>
+<tbody>
+<tr><td><strong>Espresso making</strong></td><td>~200s/trial</td><td>2&times;+ improvement</td><td>90%+</td><td>13 hours continuous</td></tr>
+<tr><td><strong>Laundry folding</strong> (11 types)</td><td>~500s/trial</td><td>2&times;+ improvement</td><td>~70% (hardest: button shirt)</td><td>2+ hours (in new home)</td></tr>
+<tr><td><strong>Box assembly</strong> (factory deployment)</td><td>~600s/trial</td><td>2&times; improvement (after 2 iterations)</td><td>~90%</td><td>Factory deployment</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>On the most challenging tasks, RECAP more than doubled throughput (successful completions per hour) and cut the failure rate roughly in half. Notably, a &quot;targeted failure removal&quot; experiment eliminated a specific failure mode (collar orientation error) to 97% success using only 600 autonomous trajectories over 2 iterations.</p>
+
+<p><strong>Significance in the Survey Context.</strong> RECAP is the most complete realization of the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3. Where prior work demonstrated the feasibility of RL post-training on simulation benchmarks (LIBERO, etc.), RECAP is the first to prove the practicality of end-to-end RL for <em>large-scale Flow Matching VLAs</em> on <em>real-world, long-horizon, complex tasks</em>. This signals that the development trajectory from LLMs&mdash;GPT-3 (pre-training) &rarr; InstructGPT (SFT) &rarr; ChatGPT (RLHF)&mdash;is now materializing in VLA research.</p>
+
+<!-- ─────────────── π0.6-MEM ─────────────── -->
+<h3 id="sec-MEMen">10.13.2 &pi;<sub>0.6</sub>-MEM: Multi-Scale Embodied Memory for VLAs</h3>
+<p><a href="https://pi.website/research/memory" target="_blank" rel="noopener" class="ref-link">[PI Research: Memory]</a> &middot; Physical Intelligence &middot; 2025</p>
+
+<p><strong>MEM (Multi-Scale Embodied Memory)</strong> endows VLAs with multi-modal, multi-timescale memory. Section 10.4 identified &quot;long-horizon tasks and hierarchical reasoning&quot; as a core open problem; MEM offers the most direct solution to this challenge.</p>
+
+<p><strong>Key Insight: Dual Memory Representation.</strong> When a robot executes a 15-minute task such as &quot;clean the entire kitchen,&quot; two fundamentally different kinds of memory are required. (1) <em>Short-term memory</em>: recent visual information spanning a few seconds (when the arm occludes an object, or when recalling a failed grasp strategy). (2) <em>Long-term memory</em>: semantic events spanning several minutes (which ingredients have already been retrieved, which drawers have been opened). MEM&rsquo;s core insight is that these two types of memory must be represented in <em>different modalities</em>.</p>
+
+<p><strong>Architectural Components:</strong></p>
+<p>(1) <strong>Short-term Video Memory (Video Encoder).</strong> The existing ViT is extended to process video input <em>without adding any new learnable parameters</em>. A space-time separable attention structure inserts causal temporal attention alongside spatial attention every 4th layer. Tokens from past timesteps are dropped in upper layers so that the total tokens passed to the VLA backbone remain identical to a single-frame VLA. This keeps inference latency within the 300ms real-time constraint even with 16-frame input (a na&iuml;ve approach would exceed 4 seconds).</p>
+<p>(2) <strong>Long-term Language Memory.</strong> A high-level policy compresses past semantic events into a natural-language summary (m<sub>t</sub>) and incrementally updates it each step (m<sub>t+1</sub>). The key is <em>compression</em>: &quot;placed the light-green bowl, dark-blue bowl, and light-yellow bowl into the upper-right cabinet&quot; &rarr; &quot;placed three bowls into the upper-right cabinet,&quot; stripping unnecessary detail. This is critically important for reducing the train&ndash;inference distribution mismatch.</p>
+
+<p><strong>Core Design Principle: Initialization from Pre-trained VLM Weights.</strong> The video encoder is designed to guarantee exact equivalence with the original VLM at K=1 (single image) by setting the t=0 temporal position encoding to zero. This preserves the pre-trained VLM&rsquo;s knowledge perfectly while adding memory capabilities. Experiments showed that introducing memory only during the post-training phase without pre-training caused marked degradation, confirming that diverse-data memory pre-training is essential.</p>
+
+<p><strong>Real-World Results.</strong></p>
+<div class="model-table">
+<table>
+<thead><tr><th>Capability</th><th>Example Tasks</th><th>Results</th></tr></thead>
+<tbody>
+<tr><td><strong>15-min long-horizon tasks</strong></td><td>Recipe ingredient prep, full kitchen cleanup, grilled cheese sandwich cooking</td><td>2&ndash;4&times; task progress improvement vs. memoryless &pi;0.6</td></tr>
+<tr><td><strong>In-context adaptation</strong></td><td>Chopstick grip height adjustment, fridge door opening direction switch</td><td>+11%&ndash;+62% success rate vs. memoryless model</td></tr>
+<tr><td><strong>Partial observability</strong></td><td>Remembering object location in drawer, tracking grocery bag contents, coffee scoop counting</td><td>Only model with strong performance across all core memory capabilities</td></tr>
+<tr><td><strong>Non-memory task performance</strong></td><td>Shirt folding, bed making, box assembly, etc.</td><td>On par with memoryless &pi;0.6 (no degradation from memory addition)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notably, the <em>causal confusion</em> problem repeatedly reported in prior work&mdash;where adding memory actually <em>degrades</em> performance&mdash;was not observed in &pi;<sub>0.6</sub>-MEM. This is attributed to the large-scale pre-training data mix encompassing diverse optimality levels, speeds, and control frequencies, which prevents spurious correlations.</p>
+
+<p><strong>Significance in the Survey Context.</strong> MEM directly addresses the reasoning paradigms of Section 4.2 (the brain module) and the core open problem of Section 10.4 (long-horizon tasks). While &pi;0.5 approached long-horizon work through hierarchical separation (&quot;VLM planner + VLA executor&quot;), MEM tackles the same problem along the orthogonal dimension of <em>memory</em>. If hierarchical planning separates &quot;what to do,&quot; memory remembers &quot;what has been done.&quot; The two approaches are complementary rather than mutually exclusive, and their future combination is highly likely.</p>
+
+<!-- ─────────────── Integrated Comparison ─────────────── -->
+<h3 id="sec-10133IntegratedComparison">10.13.3 Integrated Significance of the Two Papers</h3>
+
+<div class="model-table">
+<table>
+<thead><tr><th>Dimension</th><th>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</th><th>&pi;<sub>0.6</sub>-MEM</th></tr></thead>
+<tbody>
+<tr><td><strong>Limitation addressed</strong></td><td>BC performance ceiling; inability to discover behavior beyond demonstrations</td><td>Memory absence; inability to handle long-horizon tasks; partial observability</td></tr>
+<tr><td><strong>Base model</strong></td><td>&pi;0.6 (Gemma 3 4B + 860M Action Expert)</td><td>&pi;0.6 (same)</td></tr>
+<tr><td><strong>Core innovation</strong></td><td>Advantage conditioning: RL policy extraction compatible with Flow Matching VLA</td><td>Video encoder (zero added parameters) + compressed language memory</td></tr>
+<tr><td><strong>Data sources</strong></td><td>Demonstrations + autonomous rollouts + human corrections (DAgger)</td><td>Robot demonstrations + video data + vision-language data</td></tr>
+<tr><td><strong>Headline results</strong></td><td>13 hours continuous espresso making; 50% failure reduction</td><td>15-min kitchen cleanup &amp; grilled cheese sandwich tasks solved</td></tr>
+<tr><td><strong>Survey connection</strong></td><td>Section 6.3 (RL post-training), Insight 5</td><td>Section 10.4 (long-horizon tasks), Section 4.2 (reasoning)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="motivation-chain"><div class="chain-title">Motivation Chain: Evolution of the &pi; Series (Updated)</div>
+<div class="chain-step"><strong>&pi;0</strong> (2024): First fusion of VLM + Flow Matching Action Expert</div>
+<div class="chain-step">&rarr; <strong>&pi;0.5</strong> (2025): Hierarchical VLM planning + &pi;0 execution, 30 min+ tasks</div>
+<div class="chain-step">&rarr; <strong>&pi;0.6</strong> (2025): Gemma 3 4B backbone + 860M Action Expert upgrade, KI training recipe</div>
+<div class="chain-step">&rarr; <strong>&pi;<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Real-world RL post-training via advantage conditioning. <em>Breaking the BC ceiling</em></div>
+<div class="chain-step">&rarr; <strong>&pi;<sub>0.6</sub>-MEM</strong> (2025): Multi-scale memory for 15 min+ long-horizon tasks. <em>Breaking the memory barrier</em></div>
+</div>
+
+<p>Taken together, PI&rsquo;s &pi; series is simultaneously pushing two core frontiers of VLA research: <strong>&quot;doing it better&quot; (RECAP)</strong> and <strong>&quot;doing it longer&quot; (MEM)</strong>. RECAP elevates individual action quality beyond demonstration level, while MEM weaves individual actions into coherent task execution spanning tens of minutes. If the two approaches were combined in a single model, a robot that &quot;self-improves at a 15-minute kitchen cleanup through trial and error&quot; becomes feasible. This represents the most concrete advancement toward the &quot;deployment readiness&quot; paradigm put forth in this survey, demonstrating that the open problems identified above are transitioning from theoretical speculation to engineering challenges.</p>
+
 <hr class="section-divider">
 <h1 id="sec-11Conclusion">11. Conclusion</h1>
 <h2 id="sec-111VLARealizingUnifiedIntelligence">11.1 VLA — Realizing Unified Intelligence</h2>
@@ -4434,9 +4620,9 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
   </a>
   <a class="toc-card" href="#sec-10미해결문제와미래전망">
     <span class="sec-num">Sec 10-11</span>
-    <h3>미해결 문제, 통합 인사이트, 결론</h3>
-    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + 미래 4대 축</div>
-    <div class="why"><strong>왜?</strong> 본 문서의 최종 산출물. 개별 서베이 어디에도 없는, 교차 통합에서만 도출되는 <em>새로운</em> 인사이트를 제공한다.</div>
+    <h3>미해결 문제, 통합 인사이트, 최전선 사례, 결론</h3>
+    <div class="desc">11가지 핵심 과제 + <strong>10개 교차 서베이 emergent 인사이트</strong> + <strong>π 시리즈 최전선 사례(RECAP &amp; MEM)</strong> + 미래 4대 축</div>
+    <div class="why"><strong>왜?</strong> 미해결 과제를 식별한 뒤, 최신 돌파구가 그 과제들을 어떻게 공략하는지 보여주어 &quot;이론→실증&quot;의 서사를 완성한다.</div>
   </a>
 </div><!-- toc-diagram -->
 
@@ -6098,6 +6284,99 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p>2026년 현재 VLA 분야의 가장 뚜렷한 분단선은 비공개 프런티어 모델(Gemini Robotics, π0.5)과 오픈 웨이트 연구 모델 사이의 실세계 일반화 격차입니다. 시뮬레이션 벤치마크(LIBERO, CALVIN)에서 양쪽의 성능이 수렴하고 있음에도, 실세계 제로샷 일반화에서는 여전히 큰 격차가 존재합니다. RoboArena 리더보드에서 경쟁력 있는 제로샷 행동을 보이는 것은 π 계열 모델뿐이라는 분석이 있습니다(Reuss, 2026).</p>
 <p>이 격차의 원인으로는 세 가지가 지목됩니다: (1) <strong>데이터 품질·다양성 격차</strong> — 프런티어 랩의 비공개 데이터가 공개 데이터셋보다 품질과 다양성이 우수, (2) <strong>벤치마크 천장 효과</strong> — 시뮬레이션 벤치마크의 포화로 실제 진전이 가려지는 현상, (3) <strong>인프라 규모 격차</strong> — 연구실 규모 vs 산업 규모의 학습 인프라 차이.</p>
 <p>ICLR 2026에서는 데이터 품질 큐레이션과 인컨텍스트 학습이 가장 과소 대표된 연구 방향으로 식별되었으며, 이 두 방향이 격차 해소의 열쇠가 될 수 있습니다. 이 문제는 10.1절의 데이터 병목과 10.2절의 일반화 벽 모두와 긴밀히 연결되며, 오픈소스 커뮤니티의 핵심 도전 과제입니다.</p>
+
+<hr class="section-divider">
+<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
+
+<p>자, 지금까지 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 쭉 살펴봤는데요. 그러면 자연스럽게 드는 질문이 있죠 — &quot;그래서 진짜로 얼마나 풀리고 있는 건데?&quot; 2025년 11월에 Physical Intelligence(PI)가 동시에 발표한 두 편의 논문이 이 질문에 대한 가장 구체적인 답을 줍니다. <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong>은 우리가 6.3절과 Insight 5에서 이야기한 &quot;BC에서 RL로의 전환&quot;을, <strong>π<sub>0.6</sub>-MEM</strong>은 10.4절의 &quot;장기 과제와 메모리 부재&quot;를 각각 정면으로 공략하는 거예요. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하고, VLA의 두 가지 핵심 한계 — &quot;BC의 성능 천장&quot;과 &quot;메모리 부재&quot; — 를 실세계 규모에서 돌파합니다.</p>
+
+<!-- ─────────────── π*0.6 / RECAP ─────────────── -->
+<h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub> / RECAP: 경험으로부터 배우는 VLA</h3>
+<p><a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[arXiv:2511.14759]</a> · Physical Intelligence · 2025.11</p>
+
+<p><strong>RECAP(RL with Experience and Corrections via Advantage-conditioned Policies)</strong>은 VLA 모델이 실세계 경험을 통해 스스로 나아지게 하는 범용 RL 후처리 프레임워크입니다. 6.3절에서 다뤘던 RL 후처리 연구들(VLA-RL, RIPT-VLA, ConRFT 등) 기억하시죠? 그 연구들은 대부분 시뮬레이션 벤치마크에서만 검증됐었어요. RECAP은 다릅니다 — <em>실세계 장시간 복합 조작 태스크</em>에서 대규모 VLA의 end-to-end RL 학습을 처음으로 성공시킨 거예요. 질적 전환점이라고 할 수 있습니다.</p>
+
+<p><strong>핵심 기술 혁신: Advantage Conditioning.</strong> 여기서 정말 영리한 부분이 나옵니다. 기존 VLA RL 방법들은 PPO나 GRPO 같은 정책 경사(policy gradient) 기반이었잖아요? RECAP은 완전히 다른 길을 갑니다 — <em>advantage conditioning</em>이라는 방식이에요.</p>
+<p>작동 원리를 단계별로 보면: (1) 먼저 <strong>분포적 가치 함수</strong>를 따로 학습합니다. 670M짜리 소형 VLM 백본을 써서, 각 상태에서 &quot;성공까지 몇 스텝 남았나&quot;를 분포로 예측하는 거예요(201개 이산 bin). (2) 이 가치 함수로 각 행동의 <strong>advantage 값</strong>을 추정하고, &quot;Advantage: positive&quot; 또는 &quot;negative&quot;라는 텍스트 토큰을 VLA 입력에 추가합니다. (3) 학습 때는 모든 데이터에 대해 이 advantage 조건부 지도학습을 하고, 추론 때는 항상 &quot;Advantage: positive&quot;로 조건화해서 개선된 정책을 뽑아내는 겁니다.</p>
+
+<p>이게 왜 중요하냐면요 — <strong>Flow Matching 기반 VLA와 찰떡궁합</strong>이라는 거예요. PPO나 GRPO는 log-likelihood를 명시적으로 계산해야 하는데, Flow Matching 모델은 이걸 직접 제공을 못해요. 근사가 필요하죠. Advantage conditioning은 이 문제를 아예 우회해버립니다 — 그냥 조건부 지도학습만으로 정책 개선을 달성하는 거예요. 실제로 같은 데이터에서 AWR이나 PPO 기반 방법을 크게 이겼습니다.</p>
+
+<p><strong>세 가지 데이터를 하나로.</strong> RECAP의 또 다른 강점은 (1) <strong>시연 데이터</strong>(처음 SFT할 때), (2) <strong>자율 롤아웃</strong>(로봇이 스스로 해본 시도, 성공/실패 표시 포함), (3) <strong>인간 교정</strong>(로봇이 자율 실행하다 실수하면 사람이 개입해서 고쳐주는 DAgger 방식)을 하나의 프레임워크로 통합한다는 점입니다. 인간 교정은 항상 positive advantage, 나머지는 가치 함수가 판단합니다.</p>
+
+<p><strong>실세계 성과.</strong> 자, 숫자를 봅시다:</p>
+<div class="model-table">
+<table>
+<thead><tr><th>태스크</th><th>소요 시간</th><th>RECAP 효과 (throughput)</th><th>성공률</th><th>연속 운용</th></tr></thead>
+<tbody>
+<tr><td><strong>에스프레소 제조</strong></td><td>~200초/회</td><td>2배 이상 향상</td><td>90%+</td><td>13시간 연속</td></tr>
+<tr><td><strong>다양한 빨래 접기</strong>(11종)</td><td>~500초/회</td><td>2배 이상 향상</td><td>~70%(버튼셔츠 기준)</td><td>2시간+ (새 집에서)</td></tr>
+<tr><td><strong>박스 조립</strong>(공장 배포)</td><td>~600초/회</td><td>2배 향상(2회 반복 후)</td><td>~90%</td><td>공장 실배포</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>throughput(시간당 성공 횟수)이 2배 이상 올라가고, 실패율은 절반으로 떨어졌어요. 특히 인상적인 건 &quot;targeted failure removal&quot; 실험인데, 옷깃 방향 오류라는 특정 실패 모드를 600개 자율 궤적으로 단 2회 반복만에 97% 성공률까지 제거했습니다.</p>
+
+<p><strong>왜 중요한가.</strong> RECAP은 6.3절에서 이야기한 &quot;BC→RL 전환&quot;의 가장 완성된 형태입니다. LLM 세계에서 GPT-3(사전학습) → InstructGPT(SFT) → ChatGPT(RLHF)로 진화한 것처럼, VLA 세계에서도 같은 경로가 현실이 되고 있는 거예요. 시뮬레이션이 아니라 실세계에서, 장난감 태스크가 아니라 에스프레소 13시간 연속 제조에서요.</p>
+
+<!-- ─────────────── π0.6-MEM ─────────────── -->
+<h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
+<p><a href="https://pi.website/research/memory" target="_blank" rel="noopener" class="ref-link">[PI Research: Memory]</a> · Physical Intelligence · 2025</p>
+
+<p><strong>MEM(Multi-Scale Embodied Memory)</strong>은 VLA에 다중 모달, 다중 시간 스케일의 메모리를 부여하는 시스템입니다. 10.4절에서 &quot;장기 과제와 계층적 추론&quot;이 핵심 미해결 과제라고 했었죠? MEM은 이 문제를 가장 직접적으로 해결합니다.</p>
+
+<p><strong>핵심 통찰: 메모리도 종류가 다르다.</strong> 한번 생각해 보세요. 로봇이 &quot;주방 전체를 정리해&quot;라는 15분짜리 태스크를 수행할 때, 필요한 기억이 두 가지예요. (1) <em>단기 메모리</em>: &quot;방금 팔이 물체를 가려서 안 보이는데, 어디 있었더라?&quot; — 최근 몇 초의 시각 정보. (2) <em>장기 메모리</em>: &quot;어떤 재료를 이미 꺼냈고, 어떤 서랍을 열었지?&quot; — 수 분에 걸친 의미론적 이벤트. MEM의 핵심 통찰은 이 두 종류의 메모리를 <em>서로 다른 모달리티</em>로 표현해야 한다는 겁니다.</p>
+
+<p><strong>아키텍처 구성요소:</strong></p>
+<p>(1) <strong>단기 비디오 메모리 (Video Encoder).</strong> 기존 ViT를 비디오 처리로 확장하되, 놀랍게도 <em>새로운 학습 파라미터를 하나도 추가하지 않습니다</em>. 4번째 레이어마다 공간 어텐션에 시간 어텐션(causal temporal attention)을 끼워넣는 space-time separable attention 구조예요. 과거 프레임의 토큰은 상위 레이어에서 버리기 때문에, VLA 백본에 전달되는 토큰 수는 단일 프레임 때와 똑같습니다. 16프레임 입력에서도 추론 지연이 300ms 이내예요. 나이브하게 하면 4초 넘게 걸리거든요 — 엄청난 차이죠.</p>
+<p>(2) <strong>장기 언어 메모리.</strong> 고수준 정책이 과거 이벤트를 자연어 요약(m<sub>t</sub>)으로 압축하고, 매 스텝 업데이트합니다. 핵심은 <em>압축</em>이에요: &quot;밝은 초록 그릇, 진한 파란 그릇, 밝은 노란 그릇을 윗칸 오른쪽 캐비닛에 넣었다&quot; → &quot;세 개의 그릇을 윗칸 오른쪽 캐비닛에 넣었다&quot;. 불필요한 디테일을 제거해서 학습-추론 분포 불일치를 줄이는 거예요.</p>
+
+<p><strong>똑똑한 설계: 사전학습 가중치 보존.</strong> 비디오 인코더는 K=1(단일 이미지)일 때 기존 VLM과 정확히 동일하게 동작하도록 설계됐습니다 — 시간 위치 인코딩의 t=0 값을 0으로 설정하는 트릭이에요. 덕분에 기존 VLM이 알고 있던 모든 것을 완벽히 보존하면서 메모리 능력만 추가할 수 있습니다. 사전학습 없이 후처리에서만 메모리를 도입하면 성능이 확 떨어지는 것도 실험으로 확인했습니다.</p>
+
+<p><strong>실세계 성과.</strong></p>
+<div class="model-table">
+<table>
+<thead><tr><th>능력</th><th>태스크 예시</th><th>결과</th></tr></thead>
+<tbody>
+<tr><td><strong>15분 장시간 태스크</strong></td><td>레시피 재료 준비, 주방 전체 청소, 그릴드 치즈 샌드위치 조리</td><td>메모리 없는 π0.6 대비 과제 진행률 2-4배 향상</td></tr>
+<tr><td><strong>인컨텍스트 적응</strong></td><td>젓가락 파지 높이 조정, 냉장고 문 열기 방향 전환</td><td>성공률 +11%~+62%</td></tr>
+<tr><td><strong>부분 관측성 처리</strong></td><td>서랍 속 물체 위치 기억, 장보기 봉투 내용물 추적</td><td>모든 핵심 메모리 능력에서 유일하게 강한 성능</td></tr>
+<tr><td><strong>비메모리 태스크 성능</strong></td><td>셔츠 접기, 침대 정리, 박스 조립 등</td><td>메모리 없는 π0.6와 동등 (성능 저하 없음!)</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>특히 주목할 점이 하나 있어요. 기존 연구에서 반복적으로 보고됐던 <em>causal confusion(인과 혼동)</em> 문제 — 메모리를 추가하면 오히려 성능이 떨어지는 현상 — 이 π<sub>0.6</sub>-MEM에서는 나타나지 않았습니다. 왜냐하면 다양한 최적성, 속도, 제어 주파수를 포함하는 대규모 사전학습 데이터가 spurious correlation을 방지했기 때문으로 분석됩니다.</p>
+
+<p><strong>왜 중요한가.</strong> MEM은 4.2절(두뇌 모듈)의 추론 패러다임과 10.4절(장기 과제)에 직접 응답합니다. π0.5가 &quot;VLM이 계획하고 VLA가 실행하는&quot; 계층적 분리 방식이었다면, MEM은 <em>메모리</em>라는 완전히 다른 차원에서 같은 문제를 풀어요. 계층적 계획이 &quot;무엇을 할지&quot;를 분리하는 거라면, 메모리는 &quot;무엇을 했는지&quot;를 기억하는 거죠. 두 접근은 상호 배타적이 아니라 상보적이에요 — 언젠가 결합될 겁니다.</p>
+
+<!-- ─────────────── 통합 비교 ─────────────── -->
+<h3 id="sec-10133통합비교">10.13.3 두 논문의 통합적 의의</h3>
+
+<div class="model-table">
+<table>
+<thead><tr><th>차원</th><th>π<sup>*</sup><sub>0.6</sub> / RECAP</th><th>π<sub>0.6</sub>-MEM</th></tr></thead>
+<tbody>
+<tr><td><strong>해결하는 한계</strong></td><td>BC의 성능 천장, 시연 밖 행동 발견 불가</td><td>메모리 부재, 장시간 과제 불가, 부분 관측성</td></tr>
+<tr><td><strong>기반 모델</strong></td><td>π0.6 (Gemma 3 4B + 860M Action Expert)</td><td>π0.6 (동일)</td></tr>
+<tr><td><strong>핵심 혁신</strong></td><td>Advantage conditioning: Flow Matching VLA에 적용 가능한 RL 정책 추출</td><td>Video encoder (추가 파라미터 없음) + 압축형 언어 메모리</td></tr>
+<tr><td><strong>데이터 소스</strong></td><td>시연 + 자율 롤아웃 + 인간 교정(DAgger)</td><td>로봇 시연 + 비디오 데이터 + 비전-언어 데이터</td></tr>
+<tr><td><strong>대표 성과</strong></td><td>에스프레소 13시간 연속, 실패율 50% 감소</td><td>주방 청소·그릴드 치즈 등 15분 태스크 해결</td></tr>
+<tr><td><strong>서베이 연결</strong></td><td>6.3절 (RL 후처리), Insight 5</td><td>10.4절 (장기 과제), 4.2절 (추론)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="motivation-chain"><div class="chain-title">Motivation Chain: π 시리즈의 진화 (업데이트)</div>
+<div class="chain-step"><strong>π0</strong> (2024): VLM + Flow Matching Action Expert의 첫 결합</div>
+<div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
+<div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드</div>
+<div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub> / RECAP</strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
+<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
+</div>
+
+<p>정리하면요, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있습니다: <strong>&quot;더 잘하기&quot;(RECAP)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. RECAP이 개별 행동의 품질을 시연 수준 너머로 끌어올린다면, MEM은 그 행동들을 수십 분에 걸친 일관된 과제 수행으로 엮어줍니다. 두 접근이 하나의 모델에 합쳐진다면? &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 현실이 됩니다. 이건 본 서베이가 줄곧 이야기해 온 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이에요. 앞서 식별한 미해결 과제들이 이제 더 이상 이론적 추측이 아니라, 실제 공학적 도전으로 전환되고 있다는 증거입니다.</p>
+
 <hr class="section-divider">
 <h1 id="sec-11결론">11. 결론</h1>
 <p>자, 마지막으로 전체를 정리하겠습니다.</p>
