@@ -2113,9 +2113,9 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <p>ICLR 2026에서는 데이터 품질 큐레이션과 인컨텍스트 학습이 가장 과소 대표된 연구 방향으로 식별되었으며, 이 두 방향이 격차 해소의 열쇠가 될 수 있다. 이 문제는 10.1절의 데이터 병목과 10.2절의 일반화 벽 모두와 긴밀히 연결되며, 오픈소스 커뮤니티의 핵심 도전 과제이다.</p>
 
 <hr class="section-divider">
-<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
+<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025.11 – 2026.03)</h2>
 
-<p>앞선 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 도출했다. 그렇다면 이 과제들에 대해 실제로 얼마나 진전이 이루어지고 있는가? 2025년 11월, Physical Intelligence(PI)가 동시에 발표한 두 논문은 이 질문에 대한 가장 구체적인 답변을 제공한다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 6.3절과 Insight 5에서 논의한 "BC→RL 전환"을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 "장기 과제와 메모리 부재"를 각각 정면으로 공략한다. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하며, 각각 VLA의 핵심 한계인 "BC의 성능 천장"과 "메모리 부재"를 실세계 규모에서 돌파한다.</p>
+<p>앞선 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 도출했다. 그렇다면 이 과제들에 대해 실제로 얼마나 진전이 이루어지고 있는가? 2025년 11월과 2026년 3월, Physical Intelligence(PI)가 잇달아 발표한 두 논문은 이 질문에 대한 가장 구체적인 답변을 제공한다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 6.3절과 Insight 5에서 논의한 "BC→RL 전환"을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 "장기 과제와 메모리 부재"를 각각 정면으로 공략한다. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하며, 각각 VLA의 핵심 한계인 "BC의 성능 천장"과 "메모리 부재"를 실세계 규모에서 돌파한다.</p>
 
 <!-- ─────────────── π*0.6 ─────────────── -->
 <h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub>: 경험으로부터 배우는 VLA</h3>
@@ -2148,7 +2148,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
-<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> · Physical Intelligence · 2025</p>
+<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> · Physical Intelligence · 2026.03</p>
 
 <p><strong>MEM(Multi-Scale Embodied Memory)</strong>은 VLA에 다중 모달·다중 시간 스케일의 메모리를 부여하는 시스템이다. 10.4절에서 &quot;장기 과제와 계층적 추론&quot;을 핵심 미해결 과제로 식별했는데, MEM은 이 문제에 대한 가장 직접적인 해법을 제시한다.</p>
 
@@ -2199,7 +2199,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
 <div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드, KI 학습 레시피</div>
 <div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub></strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
-<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
+<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2026.03): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
 </div>
 
 <p>이 두 논문을 종합하면, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있다: <strong>&quot;더 잘하기&quot;(π<sup>*</sup><sub>0.6</sub>)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. π<sup>*</sup><sub>0.6</sub>가 개별 행동의 품질을 시연 수준을 넘어 끌어올린다면, MEM은 개별 행동들이 수십 분에 걸친 일관된 과제 수행으로 엮이도록 한다. 두 접근이 하나의 모델에 결합된다면, &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 실현 가능해진다. 이는 본 서베이가 제시한 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이며, 앞서 식별한 미해결 과제들이 더 이상 이론적 추측이 아닌 공학적 도전으로 전환되고 있음을 보여준다.</p>
@@ -2490,7 +2490,7 @@ body.resizing, body.resizing *, body.resizing *::before, body.resizing *::after 
 <li id="ref-155"><span class="ref-num">[155]</span> Tang, Y. et al. (2023). <em>SayTap: Language to Quadrupedal Locomotion</em>. arXiv:2306.07580. <a href="https://arxiv.org/abs/2306.07580" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-156"><span class="ref-num">[156]</span> Wang, L. et al. (2024). <em>HPT: Scaling Proprioceptive-Visual Learning with Heterogeneous Pre-trained Transformers</em>. arXiv:2409.20537. <a href="https://arxiv.org/abs/2409.20537" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-157"><span class="ref-num">[157]</span> Physical Intelligence (2025). <em>π<sup>*</sup><sub>0.6</sub>: a VLA That Learns From Experience</em>. arXiv:2511.14759. <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
-<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2025). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
+<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2026). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 
 
 </ol>
@@ -4146,9 +4146,9 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p>At ICLR 2026, data quality curation and in-context learning were identified as the most underrepresented research directions, and these two directions may hold the key to closing the gap. This problem is closely linked to both the data bottleneck of Section 10.1 and the generalization wall of Section 10.2, and constitutes a central challenge for the open-source community.</p>
 
 <hr class="section-divider">
-<h2 id="sec-1013FrontierCaseStudy">10.13 Frontier Case Study: Two Breakthroughs from the &pi; Series (November 2025)</h2>
+<h2 id="sec-1013FrontierCaseStudy">10.13 Frontier Case Study: Two Breakthroughs from the &pi; Series (2025.11 &ndash; 2026.03)</h2>
 
-<p>Sections 10.1&ndash;10.12 identified the core open problems and cross-survey insights for VLA research. How much concrete progress is actually being made on these challenges? In November 2025, Physical Intelligence (PI) simultaneously published two papers that provide the most tangible answer to this question. <strong>&pi;<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> directly attacks the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3 and Insight 5, while <strong>&pi;<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> confronts the &quot;long-horizon tasks and memory absence&quot; problem from Section 10.4. Both papers build on the &pi;0.6 model (Gemma 3 4B VLM + 860M Action Expert) and break through two core VLA limitations&mdash;the performance ceiling of behavioral cloning and the absence of memory&mdash;at real-world scale.</p>
+<p>Sections 10.1&ndash;10.12 identified the core open problems and cross-survey insights for VLA research. How much concrete progress is actually being made on these challenges? In November 2025 and March 2026, Physical Intelligence (PI) published two papers in quick succession that provide the most tangible answer to this question. <strong>&pi;<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a> directly attacks the &quot;BC&rarr;RL transition&quot; discussed in Section 6.3 and Insight 5, while <strong>&pi;<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> confronts the &quot;long-horizon tasks and memory absence&quot; problem from Section 10.4. Both papers build on the &pi;0.6 model (Gemma 3 4B VLM + 860M Action Expert) and break through two core VLA limitations&mdash;the performance ceiling of behavioral cloning and the absence of memory&mdash;at real-world scale.</p>
 
 <!-- ─────────────── π*0.6 ─────────────── -->
 <h3 id="sec-RECAPen">10.13.1 &pi;<sup>*</sup><sub>0.6</sub>: A VLA That Learns from Experience</h3>
@@ -4181,7 +4181,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEMen">10.13.2 &pi;<sub>0.6</sub>-MEM: Multi-Scale Embodied Memory for VLAs</h3>
-<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> &middot; Physical Intelligence &middot; 2025</p>
+<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> &middot; Physical Intelligence &middot; 2026.03</p>
 
 <p><strong>MEM (Multi-Scale Embodied Memory)</strong> endows VLAs with multi-modal, multi-timescale memory. Section 10.4 identified &quot;long-horizon tasks and hierarchical reasoning&quot; as a core open problem; MEM offers the most direct solution to this challenge.</p>
 
@@ -4232,7 +4232,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <div class="chain-step">&rarr; <strong>&pi;0.5</strong> (2025): Hierarchical VLM planning + &pi;0 execution, 30 min+ tasks</div>
 <div class="chain-step">&rarr; <strong>&pi;0.6</strong> (2025): Gemma 3 4B backbone + 860M Action Expert upgrade, KI training recipe</div>
 <div class="chain-step">&rarr; <strong>&pi;<sup>*</sup><sub>0.6</sub></strong> (2025.11): Real-world RL post-training via advantage conditioning. <em>Breaking the BC ceiling</em></div>
-<div class="chain-step">&rarr; <strong>&pi;<sub>0.6</sub>-MEM</strong> (2025): Multi-scale memory for 15 min+ long-horizon tasks. <em>Breaking the memory barrier</em></div>
+<div class="chain-step">&rarr; <strong>&pi;<sub>0.6</sub>-MEM</strong> (2026.03): Multi-scale memory for 15 min+ long-horizon tasks. <em>Breaking the memory barrier</em></div>
 </div>
 
 <p>Taken together, PI&rsquo;s &pi; series is simultaneously pushing two core frontiers of VLA research: <strong>&quot;doing it better&quot; (&pi;<sup>*</sup><sub>0.6</sub>)</strong> and <strong>&quot;doing it longer&quot; (MEM)</strong>. &pi;<sup>*</sup><sub>0.6</sub> elevates individual action quality beyond demonstration level, while MEM weaves individual actions into coherent task execution spanning tens of minutes. If the two approaches were combined in a single model, a robot that &quot;self-improves at a 15-minute kitchen cleanup through trial and error&quot; becomes feasible. This represents the most concrete advancement toward the &quot;deployment readiness&quot; paradigm put forth in this survey, demonstrating that the open problems identified above are transitioning from theoretical speculation to engineering challenges.</p>
@@ -4523,7 +4523,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <li id="ref-155"><span class="ref-num">[155]</span> Tang, Y. et al. (2023). <em>SayTap: Language to Quadrupedal Locomotion</em>. arXiv:2306.07580. <a href="https://arxiv.org/abs/2306.07580" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-156"><span class="ref-num">[156]</span> Wang, L. et al. (2024). <em>HPT: Scaling Proprioceptive-Visual Learning with Heterogeneous Pre-trained Transformers</em>. arXiv:2409.20537. <a href="https://arxiv.org/abs/2409.20537" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-157"><span class="ref-num">[157]</span> Physical Intelligence (2025). <em>π<sup>*</sup><sub>0.6</sub>: a VLA That Learns From Experience</em>. arXiv:2511.14759. <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
-<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2025). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
+<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2026). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 
 
 </ol>
@@ -6288,9 +6288,9 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <p>ICLR 2026에서는 데이터 품질 큐레이션과 인컨텍스트 학습이 가장 과소 대표된 연구 방향으로 식별되었으며, 이 두 방향이 격차 해소의 열쇠가 될 수 있습니다. 이 문제는 10.1절의 데이터 병목과 10.2절의 일반화 벽 모두와 긴밀히 연결되며, 오픈소스 커뮤니티의 핵심 도전 과제입니다.</p>
 
 <hr class="section-divider">
-<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025년 11월)</h2>
+<h2 id="sec-1013최전선사례연구">10.13 최전선 사례 연구: π 시리즈가 열어가는 두 갈래 프런티어 (2025.11 – 2026.03)</h2>
 
-<p>자, 지금까지 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 쭉 살펴봤는데요. 그러면 자연스럽게 드는 질문이 있죠 — &quot;그래서 진짜로 얼마나 풀리고 있는 건데?&quot; 2025년 11월에 Physical Intelligence(PI)가 동시에 발표한 두 편의 논문이 이 질문에 대한 가장 구체적인 답을 줍니다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 우리가 6.3절과 Insight 5에서 이야기한 &quot;BC에서 RL로의 전환&quot;을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 &quot;장기 과제와 메모리 부재&quot;를 각각 정면으로 공략하는 거예요. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하고, VLA의 두 가지 핵심 한계 — &quot;BC의 성능 천장&quot;과 &quot;메모리 부재&quot; — 를 실세계 규모에서 돌파합니다.</p>
+<p>자, 지금까지 10.1~10.12절에서 VLA의 핵심 미해결 과제와 통합 인사이트를 쭉 살펴봤는데요. 그러면 자연스럽게 드는 질문이 있죠 — &quot;그래서 진짜로 얼마나 풀리고 있는 건데?&quot; 2025년 11월과 2026년 3월에 Physical Intelligence(PI)가 잇달아 발표한 두 편의 논문이 이 질문에 대한 가장 구체적인 답을 줍니다. <strong>π<sup>*</sup><sub>0.6</sub></strong> <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" class="ref-link">[157]</a>은 우리가 6.3절과 Insight 5에서 이야기한 &quot;BC에서 RL로의 전환&quot;을, <strong>π<sub>0.6</sub>-MEM</strong> <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a>은 10.4절의 &quot;장기 과제와 메모리 부재&quot;를 각각 정면으로 공략하는 거예요. 두 논문 모두 π0.6 모델(Gemma 3 4B VLM + 860M Action Expert)을 기반으로 하고, VLA의 두 가지 핵심 한계 — &quot;BC의 성능 천장&quot;과 &quot;메모리 부재&quot; — 를 실세계 규모에서 돌파합니다.</p>
 
 <!-- ─────────────── π*0.6 ─────────────── -->
 <h3 id="sec-RECAP">10.13.1 π<sup>*</sup><sub>0.6</sub>: 경험으로부터 배우는 VLA</h3>
@@ -6323,7 +6323,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 
 <!-- ─────────────── π0.6-MEM ─────────────── -->
 <h3 id="sec-MEM">10.13.2 π<sub>0.6</sub>-MEM: VLA를 위한 다중 스케일 체화 메모리</h3>
-<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> · Physical Intelligence · 2025</p>
+<p><a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" class="ref-link">[158]</a> · Physical Intelligence · 2026.03</p>
 
 <p><strong>MEM(Multi-Scale Embodied Memory)</strong>은 VLA에 다중 모달, 다중 시간 스케일의 메모리를 부여하는 시스템입니다. 10.4절에서 &quot;장기 과제와 계층적 추론&quot;이 핵심 미해결 과제라고 했었죠? MEM은 이 문제를 가장 직접적으로 해결합니다.</p>
 
@@ -6374,7 +6374,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <div class="chain-step">→ <strong>π0.5</strong> (2025): 계층적 VLM 계획 + π0 실행, 30분+ 장시간 작업</div>
 <div class="chain-step">→ <strong>π0.6</strong> (2025): Gemma 3 4B 백본 + 860M Action Expert로 업그레이드</div>
 <div class="chain-step">→ <strong>π<sup>*</sup><sub>0.6</sub></strong> (2025.11): Advantage conditioning으로 실세계 RL 후처리. <em>BC의 성능 천장 돌파</em></div>
-<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2025): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
+<div class="chain-step">→ <strong>π<sub>0.6</sub>-MEM</strong> (2026.03): 다중 스케일 메모리로 15분+ 장시간 태스크 해결. <em>메모리 부재 한계 돌파</em></div>
 </div>
 
 <p>정리하면요, PI의 π 시리즈는 VLA 연구의 두 가지 핵심 프런티어를 동시에 밀어내고 있습니다: <strong>&quot;더 잘하기&quot;(π<sup>*</sup><sub>0.6</sub>)</strong>와 <strong>&quot;더 오래 하기&quot;(MEM)</strong>. π<sup>*</sup><sub>0.6</sub>가 개별 행동의 품질을 시연 수준 너머로 끌어올린다면, MEM은 그 행동들을 수십 분에 걸친 일관된 과제 수행으로 엮어줍니다. 두 접근이 하나의 모델에 합쳐진다면? &quot;15분짜리 주방 정리를 시행착오를 통해 스스로 개선하는 로봇&quot;이 현실이 됩니다. 이건 본 서베이가 줄곧 이야기해 온 &quot;배포 준비(deployment readiness)&quot; 패러다임의 가장 구체적인 진전이에요. 앞서 식별한 미해결 과제들이 이제 더 이상 이론적 추측이 아니라, 실제 공학적 도전으로 전환되고 있다는 증거입니다.</p>
@@ -6667,7 +6667,7 @@ Language → Code → Reasoning → Goal → Trajectory → Affordance → Laten
 <li id="ref-155"><span class="ref-num">[155]</span> Tang, Y. et al. (2023). <em>SayTap: Language to Quadrupedal Locomotion</em>. arXiv:2306.07580. <a href="https://arxiv.org/abs/2306.07580" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-156"><span class="ref-num">[156]</span> Wang, L. et al. (2024). <em>HPT: Scaling Proprioceptive-Visual Learning with Heterogeneous Pre-trained Transformers</em>. arXiv:2409.20537. <a href="https://arxiv.org/abs/2409.20537" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 <li id="ref-157"><span class="ref-num">[157]</span> Physical Intelligence (2025). <em>π<sup>*</sup><sub>0.6</sub>: a VLA That Learns From Experience</em>. arXiv:2511.14759. <a href="https://arxiv.org/abs/2511.14759" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
-<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2025). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
+<li id="ref-158"><span class="ref-num">[158]</span> Physical Intelligence (2026). <em>MEM: Multi-Scale Embodied Memory for Vision Language Action Models</em>. arXiv:2603.03596. <a href="https://arxiv.org/abs/2603.03596" target="_blank" rel="noopener" style="font-size:12px; color:#888;">[arXiv]</a></li>
 
 
 </ol>
